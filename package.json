@@ -1,0 +1,29 @@
+{
+  "name": "grocery-store",
+  "version": "0.0.1",
+  "description": "Repository was created as a part of university practise and as an example of a \"store\" that can integrate the ref-app (https://github.com/Andrew15-5/ref-app).",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrew15-5/Grocery-Store.git"
+  },
+  "keywords": [
+    "grocery",
+    "store",
+    "university",
+    "practise"
+  ],
+  "author": "Andrew15-5, CoolichWithYou, TaisiaOtroshenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Andrew15-5/Grocery-Store/issues"
+  },
+  "homepage": "https://github.com/Andrew15-5/Grocery-Store#readme",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4"
+  }
+}
