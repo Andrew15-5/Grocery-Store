@@ -1,6 +1,6 @@
 import express from "express"
 import path from "path"
-import { registrationLogic } from "./registration"
+import { registration_logic } from "./registration"
 
 const app = express()
 const SERVER_PORT = 3000
@@ -15,7 +15,7 @@ app.get("/registration", function (request, response) {
 const urlencoded_parser = express.urlencoded({ extended: false });
 
 //getting password from form
-app.post("/registration", urlencoded_parser, registrationLogic)
+app.post("/registration", urlencoded_parser, registration_logic)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server started on port ${SERVER_PORT}`)
