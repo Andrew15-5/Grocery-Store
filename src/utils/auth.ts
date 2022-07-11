@@ -1,13 +1,19 @@
 import { Response, Request } from "express"
 import jwt from "jsonwebtoken"
 
-export function authenticate_user(response: Response): Response {
-  return response
+export function authenticate_user(username: string, response: Response): Response {
+  const user = { name: username }
+
+  //encrypting the user name by secret key
+  const access_token = jwt.sign(user, process.env.JWT_SECRET_KEY as string)
+
+  return response.cookie("access_token", access_token, { 
+    maxAge: 1000 * 60 * 60 * 24 * 7 
+  })
 }
 
 export function deauthenticate_user(response: Response): Response {
-  response.clearCookie("access_token")
-  return response
+  return response.clearCookie("access_token")
 }
 
 export function is_user_authenticated(request: Request): boolean {
