@@ -6,6 +6,7 @@ export function authenticate_user(response: Response): Response {
 }
 
 export function deauthenticate_user(response: Response): Response {
+  response.clearCookie("access_token")
   return response
 }
 
