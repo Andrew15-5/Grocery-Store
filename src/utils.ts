@@ -1,3 +1,10 @@
+import path from "path"
+import { Pool } from "pg"
+
+export { path, Pool }
+
+export const pool = new Pool()
+
 export function make_sure_all_env_vars_are_set() {
   const env_vars: string[] = [
     "PEPPER",

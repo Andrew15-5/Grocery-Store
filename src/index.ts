@@ -1,5 +1,5 @@
 import express from "express"
-import path from "path"
+import { path } from "./utils"
 import * as utils from "./utils"
 
 const app = express()
