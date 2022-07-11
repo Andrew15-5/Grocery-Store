@@ -7,6 +7,10 @@ const SERVER_PORT = 3000
 
 app.use(express.static(path.resolve("./public")))
 
+app.get("/catalog", function (request, response) {
+  response.sendFile(path.resolve("./public/catalog.html"));
+});
+
 app.get("/registration", function (request, response) {
   response.sendFile(path.resolve("./public/registration.html"));
 });
