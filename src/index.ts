@@ -10,8 +10,10 @@ const SERVER_PORT = 3000
 utils.make_sure_all_env_vars_are_set()
 
 app.use(express.static(path.resolve("./public")))
+app.use(express.urlencoded({ extended: true }))
 
 app.get("/login", login.get)
+app.post("/login", login.set)
 
 app.get("/catalog", function (request, response) {
   response.sendFile(path.resolve("./public/catalog.html"));
