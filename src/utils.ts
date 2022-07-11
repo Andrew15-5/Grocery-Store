@@ -1,6 +1,7 @@
 export function make_sure_all_env_vars_are_set() {
   const env_vars: string[] = [
-    "PEPPER"
+    "PEPPER",
+    "JWT_SECRET_KEY"
   ]
   let error_occured = false
   for (const env_var of env_vars) {
