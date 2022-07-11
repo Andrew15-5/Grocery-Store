@@ -1,6 +1,6 @@
 {
   "name": "grocery-store",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Repository was created as a part of university practise and as an example of a \"store\" that can integrate the ref-app (https://github.com/Andrew15-5/ref-app).",
   "main": "dist/index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "argon2": "^0.28.7",
     "express": "^4.18.1"
   }
 }
