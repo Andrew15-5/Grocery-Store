@@ -1,5 +1,6 @@
-import { Response, Request } from "express"
 import jwt from "jsonwebtoken"
+
+import { Request, Response } from "../utils"
 
 export function authenticate_user(username: string, response: Response): Response {
   const user = { name: username }

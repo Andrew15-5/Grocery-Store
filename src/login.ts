@@ -1,6 +1,4 @@
-import { Request } from "express"
-import { Response } from "express-serve-static-core/index"
-import { path, pool } from "./utils"
+import { path, pool, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
 import { check_password } from "./utils/hash"
 

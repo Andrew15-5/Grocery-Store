@@ -1,8 +1,6 @@
-import { Request } from "express"
-import { Response } from "express-serve-static-core/index"
+import { path, pool, Request, Response } from "./utils"
 import { authenticate_user } from "./utils/auth"
 import { generate_hash } from "./utils/hash"
-import { path, pool } from "./utils"
 
 namespace registration {
   export function get(request: Request, response: Response) {
