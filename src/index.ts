@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookie_parser())
 
 app.get("/login", login.get)
-app.post("/login", login.set)
+app.post("/login", login.post)
 
 app.get("/catalog", function (request, response) {
   response.sendFile(path.resolve("./public/catalog.html"));

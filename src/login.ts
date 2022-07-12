@@ -13,7 +13,7 @@ namespace login {
     response.sendFile(path.resolve("./public/login.html"))
   }
 
-  export async function set(reqest: Request, response: Response) {
+  export async function post(reqest: Request, response: Response) {
     const { username, password } = reqest.body
 
     try {
