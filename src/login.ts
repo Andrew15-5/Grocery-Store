@@ -8,7 +8,7 @@ namespace login {
   export function get(reqest: Request, response: Response) {
     response.status(200)
     if (auth.is_user_authenticated(reqest)) {
-      response.redirect("/catalog")
+      return response.redirect("/catalog")
     }
     response.sendFile(path.resolve("./public/login.html"))
   }
