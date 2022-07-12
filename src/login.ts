@@ -3,16 +3,16 @@ import * as auth from "./utils/auth"
 import { check_password } from "./utils/hash"
 
 namespace login {
-  export function get(reqest: Request, response: Response) {
+  export function get(request: Request, response: Response) {
     response.status(200)
-    if (auth.is_user_authenticated(reqest)) {
+    if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
     response.sendFile(path.resolve("./public/login.html"))
   }
 
-  export async function post(reqest: Request, response: Response) {
-    const { username, password } = reqest.body
+  export async function post(request: Request, response: Response) {
+    const { username, password } = request.body
 
     try {
       const hash = await fetch_user_info(username)
