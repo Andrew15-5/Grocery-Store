@@ -7,8 +7,8 @@ export function authenticate_user(username: string, response: Response): Respons
   //encrypting the user name by secret key
   const access_token = jwt.sign(user, process.env.JWT_SECRET_KEY as string)
 
-  return response.cookie("access_token", access_token, { 
-    maxAge: 1000 * 60 * 60 * 24 * 7 
+  return response.cookie("access_token", access_token, {
+    maxAge: 1000 * 60 * 60 * 24 * 7
   })
 }
 
@@ -20,9 +20,9 @@ export function is_user_authenticated(request: Request): boolean {
   if (!("access_token" in request.cookies)) return false
   const access_token = request.cookies.access_token
   try {
-    const decoded = jwt.verify(access_token, process.env.JWT_SECRET_KEY as string);
-  } catch (error) { 
-    return false 
+    jwt.verify(access_token, process.env.JWT_SECRET_KEY as string)
+  } catch (error) {
+    return false
   }
   return true
 }
