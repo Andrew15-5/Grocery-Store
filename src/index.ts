@@ -1,9 +1,9 @@
+import cookie_parser from "cookie-parser"
 import express from "express"
-import { path } from "./utils"
-import * as utils from "./utils"
 import login from "./login"
 import registration from "./registration"
-import cookie_parser from "cookie-parser"
+import { path } from "./utils"
+import * as utils from "./utils"
 
 const app = express()
 const SERVER_PORT = 3000
