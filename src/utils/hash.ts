@@ -16,6 +16,5 @@ export async function generate_hash(password: string): Promise<string> {
 
 function get_random_pepper() {
   const charset = process.env.PEPPER as string
-  console.log(charset)
   return charset[Math.floor(Math.random() * charset.length)]
 }
