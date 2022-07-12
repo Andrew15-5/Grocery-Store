@@ -1,5 +1,7 @@
 import cookie_parser from "cookie-parser"
 import express from "express"
+
+import catalog from "./catalog"
 import login from "./login"
 import registration from "./registration"
 import { path } from "./utils"
@@ -17,9 +19,7 @@ app.use(cookie_parser())
 app.get("/login", login.get)
 app.post("/login", login.post)
 
-app.get("/catalog", function (request, response) {
-  response.sendFile(path.resolve("./public/catalog.html"));
-});
+app.get("/catalog", catalog.get)
 
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
