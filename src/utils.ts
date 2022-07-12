@@ -3,7 +3,7 @@ import { Response } from "express-serve-static-core/index"
 import path from "path"
 import { Pool } from "pg"
 
-export { path, Pool, Request, Response }
+export { path, Request, Response }
 
 export const pool = new Pool()
 
