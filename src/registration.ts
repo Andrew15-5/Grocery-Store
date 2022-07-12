@@ -4,12 +4,12 @@ import { authenticate_user } from "./utils/auth"
 import { generate_hash } from "./utils/hash"
 import { pool } from "./utils"
 
-export function registration_logic(request: Request, response: Response){
+export async function registration_logic(request: Request, response: Response){
   if (request.body.password != request.body.repeat_password) {
     return response.send("Passwords don't match")
   }
   
-  const hash = generate_hash(request.body.password)
+  const hash = await generate_hash(request.body.password)
 
   authenticate_user(request.body.username, response)
 
