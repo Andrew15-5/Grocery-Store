@@ -3,7 +3,7 @@ import argon2 from "argon2"
 export async function check_password(password: string, hash: string): Promise<boolean> {
   const charset = process.env.PEPPER as string
   const hash_verifications = []
-  for (let char of charset) {
+  for (const char of charset) {
     hash_verifications.push(argon2.verify(hash, password + char))
   }
   const results = await Promise.all(hash_verifications)
