@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Каталог</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .item {
+            text-align: center;
+            margin: 15px;
+            height: 400px;
+            width: 300px;
+        }
+
+        .container {
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-rows: repeat(2, 450px);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {{#each products}}
+        <div class="item">
+            <img style="height: 100%; width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
+            <div>{{this.name}}</div>
+            <div>{{this.price}} ₽</div>
+        </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>

@@ -12,6 +12,8 @@ const SERVER_PORT = 3000
 
 utils.make_sure_all_env_vars_are_set()
 
+app.set("view engine", "hbs");
+
 app.use(express.static(path.resolve("./public")))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookie_parser())
