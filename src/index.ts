@@ -16,10 +16,10 @@ app.use(express.static(path.resolve("./public")))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookie_parser())
 
+app.get("/catalog", catalog.get)
+
 app.get("/login", login.get)
 app.post("/login", login.post)
-
-app.get("/catalog", catalog.get)
 
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
