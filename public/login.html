@@ -6,9 +6,9 @@
 </head>
 <body>
   <form method="post">
-    <input type="text" placeholder="Введите username" name="username" required=""><br>
+    <input type="text" placeholder="Введите username" name="username" required autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
     <br>
-    <input type="password" placeholder="Введите пароль" name="password" required=""><br>
+    <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
     <br>
     <button type="submit">Войти</button>
   </form>

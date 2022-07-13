@@ -1,3 +1,4 @@
+import * as utils from "./utils"
 import { path, pool, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
 import { check_password } from "./utils/hash"
@@ -14,6 +15,13 @@ namespace login {
   export async function post(request: Request, response: Response) {
     const { username, password } = request.body
 
+    if (typeof username !== "string" ||
+      typeof password !== "string" ||
+      !utils.is_username_valid(username) ||
+      !utils.is_password_valid(password)) {
+      return response.status(400).redirect("/login")
+    }
+
     try {
       const hash = await fetch_user_info(username)
       if (hash === null) return response.status(400).redirect("/login")
@@ -22,6 +30,7 @@ namespace login {
       if (!password_is_correct) return response.status(400).redirect("/login")
     }
     catch (error) {
+      response.status(500).redirect("/login")
       throw error
     }
 
