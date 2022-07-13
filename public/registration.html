@@ -6,11 +6,23 @@
 </head>
 <body>
   <form method="post">
-    <input type="text" placeholder="Введите username" name="username" required=""><br>
+    <div>Для username можно использовать только:</div>
+    <ul>
+      <li>латинские буквы (a-z и A-Z)</li>
+      <li>цифры (0-9)</li>
+      <li>символы .-_</li>
+    </ul>
+    <input type="text" placeholder="Введите username" name="username" required autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
     <br>
-    <input type="password" placeholder="Введите пароль" name="password" required=""><br>
+    <div>Длина пароля должна быть в диапазоне [10; 1000] и включать в себя:</div>
+    <ul>
+      <li>латинские буквы нижнего регистра (a-z)</li>
+      <li>латинские буквы верхнего регистра (A-Z)</li>
+      <li>цифры (0-9)</li>
+    </ul>
+    <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
     <br>
-    <input type="password" placeholder="Введите повторно пароль" name="repeat_password" required=""><br>
+    <input type="password" placeholder="Введите повторно пароль" name="repeat_password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
     <br>
     <input type="submit" value="Зарегистрироваться">
   </form>
