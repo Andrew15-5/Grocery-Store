@@ -9,7 +9,7 @@ namespace catalog {
           const image_src = `data:image/png;base64,${image_buffer}`
           query_response.rows[i].image = image_src
         }
-        response.render("catalog.hbs", { products: query_response.rows })
+        response.status(200).render("catalog.hbs", { products: query_response.rows })
     }
     catch(error) {
       response.status(500).redirect("/")
