@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>Каталог</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .grid-container {
+            border: solid 2px #000;
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 400px 400px 400px;
+            grid-template-rows: 400px 400px 400px;
+        }
+
+        .grid-item {
+            text-align: center;
+            font-size: 1.1em;
+            padding: 1.5em;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-container">
+        {{#each products}}
+        <div translate="false" class="grid-item">
+            <img src="{{this.image}}" height="300" width="300" alt="{{this.name}}" />
+            <div>{{this.name}}</div>
+            <div>{{this.price}} ₽</div>
+        </div>
+        {{/each}}
+    </div>
+    </div>
+</body>
+
+</html>
