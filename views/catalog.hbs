@@ -10,33 +10,32 @@
             box-sizing: border-box;
         }
 
-        .grid-container {
-            border: solid 2px #000;
-            display: grid;
-            justify-content: center;
-            grid-template-columns: 400px 400px 400px;
-            grid-template-rows: 400px 400px 400px;
+        .item {
+            text-align: center;
+            margin: 15px;
+            height: 400px;
+            width: 300px;
         }
 
-        .grid-item {
-            text-align: center;
-            font-size: 1.1em;
-            padding: 1.5em;
-            margin: 15px;
+        .container {
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-rows: repeat(2, 450px);
         }
+
     </style>
 </head>
 
 <body>
-    <div class="grid-container">
+    <div class="container">
         {{#each products}}
-        <div translate="false" class="grid-item">
-            <img src="{{this.image}}" height="300" width="300" alt="{{this.name}}" />
+        <div class="item">
+            <img style="height: 100%; width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
             <div>{{this.name}}</div>
             <div>{{this.price}} ₽</div>
         </div>
         {{/each}}
-    </div>
     </div>
 </body>
 
