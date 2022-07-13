@@ -1,4 +1,5 @@
 import { pool, Request, Response } from "./utils"
+import { authenticate_user, is_user_authenticated } from "./utils/auth"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {
@@ -10,8 +11,9 @@ namespace catalog {
         const image_src = `data:image/png;base64,${image_buffer}`
         query_response.rows[i].image = image_src
       }
+      const is_auth = is_user_authenticated(request)
       response.status(200).render("catalog.hbs", {
-        products: query_response.rows
+        products: query_response.rows, is_auth: is_auth
       })
     }
     catch (error) {
