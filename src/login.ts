@@ -14,13 +14,18 @@ namespace login {
 
   export async function post(request: Request, response: Response) {
     const { username, password } = request.body
+    let { log_out_on_session_end } = request.body
 
     if (typeof username !== "string" ||
       typeof password !== "string" ||
+      (typeof log_out_on_session_end !== "string" &&
+        typeof log_out_on_session_end !== "undefined") ||
       !utils.is_username_valid(username) ||
       !utils.is_password_valid(password)) {
       return response.status(400).redirect("/login")
     }
+
+    log_out_on_session_end = (log_out_on_session_end === "on")
 
     try {
       const hash = await fetch_user_info(username)
@@ -34,7 +39,8 @@ namespace login {
       throw error
     }
 
-    auth.authenticate_user(username, response).status(200).redirect("/catalog")
+    auth.authenticate_user(username, response, log_out_on_session_end)
+      .status(200).redirect("/catalog")
   }
 
   async function fetch_user_info(username: string) {
