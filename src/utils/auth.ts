@@ -2,12 +2,15 @@ import jwt from "jsonwebtoken"
 
 import { Request, Response } from "../utils"
 
-export function authenticate_user(username: string, response: Response): Response {
+export function authenticate_user(username: string, response: Response, delete_on_session_end?: boolean): Response {
   const user = { name: username }
 
   //encrypting the user name by secret key
   const access_token = jwt.sign(user, process.env.JWT_SECRET_KEY as string)
 
+  if (delete_on_session_end) {
+    return response.cookie("access_token", access_token)
+  }
   return response.cookie("access_token", access_token, {
     maxAge: 1000 * 60 * 60 * 24 * 7
   })
