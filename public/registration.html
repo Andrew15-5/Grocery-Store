@@ -5,24 +5,27 @@
   <title>Регистрация</title>
 </head>
 <body>
+  <h1>Регистрация пользователя</h1>
   <form method="post">
-    <div>Для username можно использовать только:</div>
+    <label>Логин</label> <input type="text" placeholder="Введите логин" name="username" required autofocus autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
+    <br>
+    Для логина можно использовать только:
     <ul>
       <li>латинские буквы (a-z и A-Z)</li>
       <li>цифры (0-9)</li>
       <li>символы .-_</li>
     </ul>
-    <input type="text" placeholder="Введите username" name="username" required autofocus autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
     <br>
-    <div>Длина пароля должна быть в диапазоне [10; 1000] и включать в себя:</div>
+    <label>Пароль</label> <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
+    <br>
+    <label>Повторите пароль</label> <input type="password" placeholder="Введите пароль" name="repeat_password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
+    <br>
+    Длина пароля от 10 до 1000 и включать в себя:
     <ul>
       <li>латинские буквы нижнего регистра (a-z)</li>
       <li>латинские буквы верхнего регистра (A-Z)</li>
       <li>цифры (0-9)</li>
     </ul>
-    <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
-    <br>
-    <input type="password" placeholder="Введите повторно пароль" name="repeat_password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
     <br>
     <input type="submit" value="Зарегистрироваться">
   </form>
