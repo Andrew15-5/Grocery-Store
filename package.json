@@ -4,9 +4,9 @@
   "description": "Repository was created as a part of university practise and as an example of a \"store\" that can integrate the ref-app (https://github.com/Andrew15-5/ref-app).",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "npx tsnd --respawn src/index.ts",
+    "dev": "export $(cat .env) && npx tsnd --respawn src/index.ts",
     "build": "npx tsc",
-    "start": "node .",
+    "start": "export $(cat .env) && node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
