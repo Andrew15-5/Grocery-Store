@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookie_parser())
 
 app.get("/catalog", catalog.get)
+app.post("/catalog", catalog.post)
 
 app.get("/login", login.get)
 app.post("/login", login.post)
