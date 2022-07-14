@@ -4,11 +4,13 @@ nav {
 }
 
 nav > a {
-  color: black;
+  color: white;
+  text-decoration: none;
+  user-select: none;
 }
 
 nav > a:hover {
-  color: #0E3690;
+  color: gray;
   cursor: pointer;
   user-select: none;
 }
