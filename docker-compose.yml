@@ -1,0 +1,14 @@
+version: "2.2"
+
+services:
+  PostgreSQL_for_Grocery_Store:
+    image: ${IMAGE_HOST}postgressql_for_grocery_store
+    ports:
+      - ${PGPORT}:5432
+    environment:
+      POSTGRES_PASSWORD:
+    volumes:
+      - postgresql_for_grocery_store_data:/var/lib/postgresql/data
+
+volumes:
+  postgresql_for_grocery_store_data:

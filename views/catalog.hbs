@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>Каталог</title>
+  <link rel="stylesheet" type="text/css" href="./css/global.css">
+</head>
+
+<body>
+  <nav>
+    {{#if is_auth}}
+    <a id="log_out">Выйти из системы</a>
+    {{else}}
+    <a id="log_in" href="/login">Войти в систему</a>
+    {{/if}}
+  </nav>
+  <div class="container">
+    {{#each products}}
+    <div class="item">
+      <img style="height: 100%; width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
+      <div>{{this.name}}</div>
+      <div>{{this.price}} ₽</div>
+    </div>
+    {{/each}}
+  </div>
+  <script src="./js/log_out.js"></script>
+</body>
+
+</html>
