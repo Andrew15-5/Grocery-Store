@@ -16,6 +16,14 @@ export function authenticate_user(username: string, response: Response, delete_o
   })
 }
 
+export function get_username(request: Request): string | undefined {
+  if (!is_user_authenticated(request)) return undefined
+  const access_token = request.cookies.access_token
+  const jwt_payload = jwt.decode(access_token)
+  const data = jwt_payload as jwt.JwtPayload
+  return data?.name
+}
+
 export function deauthenticate_user(response: Response): Response {
   return response.clearCookie("access_token")
 }

@@ -22,10 +22,16 @@
       <img style="height: 100%; width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
       <div>{{this.name}}</div>
       <div>{{this.price}} ₽</div>
+      <form method="POST">
+        <input type="hidden" name="product_uri" value="{{this.uri}}">
+        <input type="submit" value="Купить">
+      </form>
     </div>
     {{/each}}
   </div>
+  <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
+  <script src="./js/show_purchase_message.js"></script>
 </body>
 
 </html>
