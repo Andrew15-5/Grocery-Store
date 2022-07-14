@@ -17,7 +17,7 @@ namespace catalog {
       })
     }
     catch (error) {
-      response.status(500).redirect("/")
+      response.status(500).redirect("/catalog")
       throw error
     }
   }
