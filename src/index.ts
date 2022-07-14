@@ -7,10 +7,10 @@ import registration from "./registration"
 import { path } from "./utils"
 import * as utils from "./utils"
 
-const app = express()
-const SERVER_PORT = 3000
-
 utils.make_sure_all_env_vars_are_set()
+
+const app = express()
+const SERVER_PORT = process.env.SERVER_PORT as string
 
 app.set("view engine", "hbs")
 
