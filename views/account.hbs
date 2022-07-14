@@ -9,9 +9,12 @@
 </head>
 
 <body>
-    <main>
-        <h1>Личный кабинет</h1>
-    </main>
+  <main>
+    {{#each account}}
+    <h1>Личный кабинет</h1>
+    <p class="name">Имя {{username}}</p>
+    {{/each}}
+  </main>
 </body>
 
 </html>
