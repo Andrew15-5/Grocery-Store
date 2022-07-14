@@ -1,9 +1,9 @@
 import { Request } from "express"
 import { Response } from "express-serve-static-core/index"
 import path from "path"
-import { Pool } from "pg"
+import { Pool, QueryResult } from "pg"
 
-export { path, Request, Response }
+export { path, QueryResult, Request, Response }
 
 export const pool = new Pool()
 
