@@ -1,4 +1,4 @@
-import { pool, Request, Response } from "./utils"
+import { pool, QueryResult, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
 
 namespace catalog {
@@ -27,9 +27,42 @@ namespace catalog {
   }
 
   export async function post(request: Request, response: Response) {
+    const { product_uri } = request.body
     const { ref } = request.query
     const suffix = (ref) ? "?ref=" + ref : ''
-    response.status(200).redirect("/catalog" + suffix)
+    const redirect_url = "/catalog" + suffix
+
+    const username = auth.get_username(request)
+    if (!username) return response.status(401).redirect("/login")
+    if (!product_uri) return response.status(400).redirect(redirect_url)
+
+    let query: QueryResult<any>
+
+    try {
+      query = await pool.query(
+        "SELECT uuid FROM users WHERE username = $1", [username])
+      const user_uuid = query.rows[0].uuid
+
+      query = await pool.query(
+        "SELECT uuid, name FROM products WHERE uri = $1", [product_uri])
+      if (query.rowCount === 0) {
+        response.status(400).redirect(redirect_url)
+      }
+      const product_uuid = query.rows[0].uuid
+      const product_name = query.rows[0].name
+
+      await pool.query(
+        "INSERT INTO purchases (user_uuid, product_uuid) VALUES ($1, $2)",
+        [user_uuid, product_uuid])
+
+      response.cookie("alert_message", `Вы приобрели ${product_name}`)
+    }
+    catch (error) {
+      response.status(500).redirect(redirect_url)
+      throw error
+    }
+
+    response.status(200).redirect(redirect_url)
   }
 }
 
