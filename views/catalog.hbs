@@ -11,7 +11,8 @@
 <body>
   <nav>
     {{#if is_auth}}
-    <a id="log_out">Выйти из системы</a>
+    <a id="my_account" href="/account"> Мой аккаунт </a> |
+    <a id="log_out"> Выйти из системы </a>
     {{else}}
     <a id="log_in" href="/login">Войти в систему</a>
     {{/if}}
