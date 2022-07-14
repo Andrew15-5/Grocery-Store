@@ -6,6 +6,7 @@ import login from "./login"
 import registration from "./registration"
 import { path } from "./utils"
 import * as utils from "./utils"
+import account from "./account"
 
 utils.make_sure_all_env_vars_are_set()
 
@@ -26,6 +27,9 @@ app.post("/login", login.post)
 
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
+
+app.get("/account", account.get)
+app.post("/account", account.post)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server started on port ${SERVER_PORT}`)
