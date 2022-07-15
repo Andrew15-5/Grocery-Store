@@ -10,9 +10,9 @@
 
 <body>
   <nav>
+    <a href="/account">Личный кабинет</a>
     {{#if is_auth}}
-    <a id="my_account" href="/account"> Мой аккаунт </a> |
-    <a id="log_out"> Выйти из системы </a>
+    <a id="log_out">Выйти из системы</a>
     {{else}}
     <a id="log_in" href="/login">Войти в систему</a>
     {{/if}}

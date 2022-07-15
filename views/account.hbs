@@ -4,17 +4,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
-  <title>Аккаунт</title>
+  <title>Личный кабинет</title>
   <link rel="stylesheet" type="text/css" href="./css/global.css">
 </head>
 
 <body>
-  <main>
-    {{#each account}}
-    <h1>Личный кабинет</h1>
-    <p class="name">Имя {{username}}</p>
-    {{/each}}
-  </main>
+  <nav>
+    <a href="/catalog">Каталог</a>
+    <a id="log_out">Выйти из системы</a>
+  </nav>
+  <h1>Личный кабинет</h1>
+  <label>Логин</label> {{username}}
+  <script src="./js/log_out.js"></script>
 </body>
 
 </html>
