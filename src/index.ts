@@ -1,6 +1,7 @@
 import cookie_parser from "cookie-parser"
 import express from "express"
 
+import account from "./account"
 import catalog from "./catalog"
 import login from "./login"
 import registration from "./registration"
@@ -26,6 +27,8 @@ app.post("/login", login.post)
 
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
+
+app.get("/account", account.get)
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server started on port ${SERVER_PORT}`)
