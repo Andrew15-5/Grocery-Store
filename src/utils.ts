@@ -1,9 +1,10 @@
 import { Request } from "express"
 import { Response } from "express-serve-static-core/index"
+import fetch from "node-fetch"
 import path from "path"
 import { Pool, QueryResult } from "pg"
 
-export { path, QueryResult, Request, Response }
+export { fetch, path, QueryResult, Request, Response }
 
 export const pool = new Pool()
 
@@ -11,7 +12,8 @@ export function make_sure_all_env_vars_are_set() {
   const env_vars: string[] = [
     "JWT_SECRET_KEY",
     "PEPPER",
-    "SERVER_PORT"
+    "SERVER_PORT",
+    "REF_APP_SERVER_PORT"
   ]
   let error_occured = false
   for (const env_var of env_vars) {

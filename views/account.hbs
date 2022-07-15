@@ -15,8 +15,13 @@
   </nav>
   <h1>Личный кабинет</h1>
   <label>Логин</label> {{username}}
+  <br>
+  <label>Бонусный баланс</label> {{reward_balance}}
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
+  {{#if error_message}}
+  <script>alert("{{error_message}}")</script>
+  {{/if}}
 </body>
 
 </html>
