@@ -33,9 +33,10 @@ namespace registration {
       }
 
       const hash = await generate_hash(password)
+      const referral_id = await utils.generate_new_referral_id()
       await pool.query(
-        "INSERT INTO users (username, password) VALUES ($1, $2);",
-        [username, hash])
+        "INSERT INTO users (username, password, referral_id) \
+        VALUES ($1, $2, $3);", [username, hash, referral_id])
     }
     catch (error) {
       response.status(500).redirect("/registration")

@@ -25,6 +25,27 @@ export function make_sure_all_env_vars_are_set() {
   if (error_occured) process.exit(1)
 }
 
+const string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+function generate_random_string(length: number, charset: string) {
+  let string = ""
+  for (let i = 0; i < length; i++) {
+    string += charset.charAt(Math.floor(Math.random() * charset.length))
+  }
+  return string
+}
+
+export async function generate_new_referral_id() {
+  const query = await pool.query("SELECT * FROM users;")
+  const list = query.rows
+
+  let new_referral_id = '-' + generate_random_string(8, string)
+  while (list.indexOf(new_referral_id) > -1) {
+    new_referral_id = '-' + generate_random_string(8, string)
+  }
+  return new_referral_id
+}
+
 export function is_username_valid(password: string) {
   const allowed_charset_and_length_restriction = /^[a-zA-Z0-9._-]{1,20}$/
   if (allowed_charset_and_length_restriction.test(password)) return true
