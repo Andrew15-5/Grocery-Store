@@ -1,3 +1,4 @@
+"use strict";
 const cookies = utils.parse_cookies();
 const message = cookies["alert_message"];
 if (message) {

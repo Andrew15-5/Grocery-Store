@@ -1,3 +1,4 @@
+"use strict";
 class utils {
   static parse_cookies() {
     const cookie_list = document.cookie.split("; ");
@@ -9,5 +10,8 @@ class utils {
       cookies[key] = value;
     }
     return cookies;
+  }
+  static remove_cookie(cookie) {
+    document.cookie = cookie + "=;max-age=0";
   }
 }
