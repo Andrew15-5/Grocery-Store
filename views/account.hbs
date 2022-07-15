@@ -17,6 +17,13 @@
   <label>Логин</label> {{username}}
   <br>
   <label>Бонусный баланс</label> {{reward_balance}}
+  <br>
+  <label>Реферальная ссылка</label>
+  {{#if referral_id}}
+  {{referral_url}} <input type="button" value="Скопировать ссылку" onclick="{{js_onclick_script}}">
+  {{else}}
+  -
+  {{/if}}
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
   {{#if error_message}}
