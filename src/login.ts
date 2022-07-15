@@ -1,6 +1,7 @@
 import * as utils from "./utils"
 import { path, pool, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
+import fetch_data from "./utils/fetch_data"
 import { check_password } from "./utils/hash"
 
 namespace login {
@@ -28,7 +29,7 @@ namespace login {
     log_out_on_session_end = (log_out_on_session_end === "on")
 
     try {
-      const hash = await fetch_user_info(username)
+      const hash = await fetch_password(username)
       if (hash === null) return response.status(400).redirect("/login")
 
       const password_is_correct = await check_password(password, hash)
@@ -43,9 +44,8 @@ namespace login {
       .status(200).redirect("/catalog")
   }
 
-  async function fetch_user_info(username: string) {
-    const response = await pool.query(
-      "SELECT password FROM users WHERE username = $1;", [username])
+  async function fetch_password(username: string) {
+    const response = await fetch_data.user("username", username, "password")
     if (response.rowCount === 0) return null
     return response.rows[0].password
   }

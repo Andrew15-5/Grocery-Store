@@ -1,5 +1,6 @@
 import { pool, QueryResult, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
+import fetch_data from "./utils/fetch_data"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {
@@ -39,12 +40,10 @@ namespace catalog {
     let query: QueryResult<any>
 
     try {
-      query = await pool.query(
-        "SELECT uuid FROM users WHERE username = $1", [username])
+      query = await fetch_data.user("username", username, "uuid")
       const user_uuid = query.rows[0].uuid
 
-      query = await pool.query(
-        "SELECT uuid, name FROM products WHERE uri = $1", [product_uri])
+      query = await fetch_data.product("uri", product_uri, "uuid, name")
       if (query.rowCount === 0) {
         response.status(400).redirect(redirect_url)
       }
