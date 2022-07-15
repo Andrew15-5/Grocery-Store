@@ -14,4 +14,17 @@ class utils {
   static remove_cookie(cookie) {
     document.cookie = cookie + "=;max-age=0";
   }
+  static init_theme_change() {
+    let current_theme = localStorage.getItem("theme");
+    if (!current_theme) {
+      current_theme = "dark";
+      localStorage.setItem("theme", current_theme);
+    }
+    const theme_element = document.getElementById("theme");
+    document.getElementById("change-theme").onclick = () => {
+      current_theme = (current_theme === "dark") ? "light" : "dark";
+      localStorage.setItem("theme", current_theme);
+      theme_element.setAttribute("href", `./css/${current_theme}-theme.css`);
+    }
+  }
 }
