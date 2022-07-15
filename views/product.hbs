@@ -7,13 +7,19 @@
 </head>
 
 <body>
-
     <main>
+        {{#each products}}
         <h1>Продукт</h1>
         <p class="data">Изображение</p>
+        <img style="height: 200px; width: 200px; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
+        </p>
         <p class="data">Название</p>
+        {{this.name}}
         <p class="data">Цена</p>
+        {{this.price}}
         <p class="data">Описание</p>
+        {{this.description}}
+        {{/each}}
     </main>
 </body>
 
