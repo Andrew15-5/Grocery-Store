@@ -5,8 +5,8 @@ import account from "./account"
 import catalog from "./catalog"
 import login from "./login"
 import registration from "./registration"
+import utils from "./utils"
 import { path } from "./utils"
-import * as utils from "./utils"
 import product from "./product"
 
 utils.make_sure_all_env_vars_are_set()

@@ -1,5 +1,5 @@
-import * as utils from "./utils"
-import { pool, QueryResult, Request, Response } from "./utils"
+import utils from "./utils"
+import { Request, Response } from "./utils"
 import * as auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
 
