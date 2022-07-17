@@ -16,6 +16,9 @@ nav > a:hover {
 }
 
 .item {
+  color: white;
+  text-decoration: none;
+  user-select: none;
   text-align: center;
   margin: 15px;
   height: 400px;

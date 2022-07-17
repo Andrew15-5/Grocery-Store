@@ -7,6 +7,7 @@ import login from "./login"
 import registration from "./registration"
 import { path } from "./utils"
 import * as utils from "./utils"
+import product from "./product"
 
 utils.make_sure_all_env_vars_are_set()
 
@@ -24,6 +25,8 @@ app.post("/catalog", catalog.post)
 
 app.get("/login", login.get)
 app.post("/login", login.post)
+
+app.get("/product/:product_uri", product.get)
 
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
