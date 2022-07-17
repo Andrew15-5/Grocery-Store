@@ -1,4 +1,5 @@
-import { Request, Response } from "./utils"
+import * as utils from "./utils"
+import { pool, QueryResult, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
 
@@ -23,6 +24,11 @@ namespace product {
       response.status(500).redirect("/catalog")
       throw error
     }
+  }
+
+  export async function post(request: Request, response: Response) {
+    const { product_uri } = request.params
+    utils.purchase_product(request, response, product_uri)
   }
 }
 

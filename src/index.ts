@@ -29,6 +29,7 @@ app.get("/login", login.get)
 app.post("/login", login.post)
 
 app.get("/product/:product_uri", product.get)
+app.post("/product/:product_uri", product.post)
 
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
