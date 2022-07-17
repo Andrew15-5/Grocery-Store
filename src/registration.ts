@@ -1,7 +1,7 @@
-import * as utils from "./utils"
+import utils from "./utils"
 import { path, pool, Request, Response } from "./utils"
-import * as auth from "./utils/auth"
-import { generate_hash } from "./utils/hash"
+import auth from "./utils/auth"
+import hash from "./utils/hash"
 
 namespace registration {
   export function get(request: Request, response: Response) {
@@ -32,10 +32,11 @@ namespace registration {
         }
       }
 
-      const hash = await generate_hash(password)
+      const hashed_password = await hash.generate_hash(password)
+      const referral_id = await utils.generate_new_referral_id()
       await pool.query(
-        "INSERT INTO users (username, password) VALUES ($1, $2);",
-        [username, hash])
+        "INSERT INTO users (username, password, referral_id) \
+        VALUES ($1, $2, $3);", [username, hashed_password, referral_id])
     }
     catch (error) {
       response.status(500).redirect("/registration")

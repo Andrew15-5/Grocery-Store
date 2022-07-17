@@ -10,6 +10,7 @@
 
 <body>
   <nav>
+    <a href="/account">Личный кабинет</a>
     {{#if is_auth}}
     <a id="log_out">Выйти из системы</a>
     {{else}}
@@ -18,7 +19,7 @@
   </nav>
   <div class="container">
     {{#each products}}
-    <div class="item">
+    <a class="item" href="/product/{{this.uri}}">
       <img style="height: 100%; width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
       <div>{{this.name}}</div>
       <div>{{this.price}} ₽</div>
@@ -26,7 +27,7 @@
         <input type="hidden" name="product_uri" value="{{this.uri}}">
         <input type="submit" value="Купить">
       </form>
-    </div>
+    </a>
     {{/each}}
   </div>
   <script src="./js/utils.js"></script>

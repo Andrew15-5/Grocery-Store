@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>Личный кабинет</title>
+  <link rel="stylesheet" type="text/css" href="./css/global.css">
+</head>
+
+<body>
+  <nav>
+    <a href="/catalog">Каталог</a>
+    <a id="log_out">Выйти из системы</a>
+  </nav>
+  <h1>Личный кабинет</h1>
+  <label>Логин</label> {{username}}
+  <br>
+  <label>Бонусный баланс</label> {{reward_balance}}
+  <br>
+  <label>Реферальная ссылка</label>
+  {{#if referral_id}}
+  {{referral_url}} <input type="button" value="Скопировать ссылку" onclick="{{js_onclick_script}}">
+  {{else}}
+  -
+  {{/if}}
+  <script src="./js/utils.js"></script>
+  <script src="./js/log_out.js"></script>
+  {{#if error_message}}
+  <script>alert("{{error_message}}")</script>
+  {{/if}}
+</body>
+
+</html>
