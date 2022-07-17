@@ -1,4 +1,4 @@
-import { Request } from "express"
+import { NextFunction, Request } from "express"
 import { Response } from "express-serve-static-core/index"
 import fetch from "node-fetch"
 import path from "path"
@@ -126,6 +126,12 @@ namespace utils {
     }
 
     response.status(200).redirect(request.url)
+  }
+
+  export function update_theme_cookie(request: Request, response: Response, next: NextFunction) {
+    const theme = request.cookies.theme || "light"
+    response.cookie("theme", theme, { expires: new Date("9999") })
+    next()
   }
 }
 

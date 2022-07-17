@@ -14,16 +14,17 @@ class utils {
   static remove_cookie(cookie) {
     document.cookie = cookie + "=;max-age=0;path=/";
   }
+  static update_cookie(name, value, date) {
+    let cookie = `${name}=${value}`
+    if (date) cookie += ";expires=" + date.toUTCString()
+    document.cookie = cookie + ";path=/";
+  }
   static init_theme_change() {
-    let current_theme = localStorage.getItem("theme");
-    if (!current_theme) {
-      current_theme = "dark";
-      localStorage.setItem("theme", current_theme);
-    }
     const theme_element = document.getElementById("theme");
+    let current_theme = this.parse_cookies()["theme"]
     document.getElementById("change-theme").onclick = () => {
       current_theme = (current_theme === "dark") ? "light" : "dark";
-      localStorage.setItem("theme", current_theme);
+      this.update_cookie("theme", current_theme, new Date("9999"))
       theme_element.setAttribute("href", `./css/${current_theme}-theme.css`);
     }
   }

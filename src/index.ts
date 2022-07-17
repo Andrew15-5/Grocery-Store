@@ -3,6 +3,7 @@ import express from "express"
 
 import account from "./account"
 import catalog from "./catalog"
+import home from "./home"
 import login from "./login"
 import registration from "./registration"
 import utils from "./utils"
@@ -19,11 +20,15 @@ app.set("view engine", "hbs")
 app.use(express.static(path.resolve("./public")))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookie_parser())
+app.use(utils.update_theme_cookie)
 
 app.get("/account", account.get)
 
 app.get("/catalog", catalog.get)
 app.post("/catalog", catalog.post)
+
+app.get("/", home.get)
+app.get("/home", home.get)
 
 app.get("/login", login.get)
 app.post("/login", login.post)
