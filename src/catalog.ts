@@ -1,4 +1,5 @@
-import { fetch, pool, QueryResult, Request, Response } from "./utils"
+import * as utils from "./utils"
+import { pool, QueryResult, Request, Response } from "./utils"
 import * as auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
 
@@ -27,20 +28,6 @@ namespace catalog {
       response.status(500).redirect(redirect_url)
       throw error
     }
-  }
-
-  async function process_referral_purchase(purchase_uuid: string, referral_id: string) {
-    const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
-    const get_referral_id_url =
-      `http://localhost:${REF_APP_SERVER_PORT}/process-purchase`
-
-    const parameters = new URLSearchParams()
-    parameters.append("purchase_uuid", purchase_uuid)
-    parameters.append("referral_id", referral_id)
-    await fetch(get_referral_id_url, {
-      method: "POST",
-      body: parameters
-    })
   }
 
   export async function post(request: Request, response: Response) {
@@ -72,7 +59,9 @@ namespace catalog {
         [user_uuid, product_uuid])
       const purchase_uuid = query.rows[0].uuid
 
-      if (ref) await process_referral_purchase(purchase_uuid, ref as string)
+      if (ref) {
+        await utils.process_referral_purchase(purchase_uuid, ref as string)
+      }
 
       response.cookie("alert_message", `Вы приобрели ${product_name}`)
     }

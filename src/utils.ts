@@ -64,3 +64,17 @@ export function is_password_valid(password: string) {
     includes_digits.test(password)) return true
   return false
 }
+
+export async function process_referral_purchase(purchase_uuid: string, referral_id: string) {
+  const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
+  const get_referral_id_url =
+    `http://localhost:${REF_APP_SERVER_PORT}/process-purchase`
+
+  const parameters = new URLSearchParams()
+  parameters.append("purchase_uuid", purchase_uuid)
+  parameters.append("referral_id", referral_id)
+  await fetch(get_referral_id_url, {
+    method: "POST",
+    body: parameters
+  })
+}
