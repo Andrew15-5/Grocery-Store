@@ -4,6 +4,9 @@ import fetch from "node-fetch"
 import path from "path"
 import { Pool, QueryResult } from "pg"
 
+import * as auth from "./utils/auth"
+import fetch_data from "./utils/fetch_data"
+
 export { fetch, path, QueryResult, Request, Response }
 
 export const pool = new Pool()
@@ -77,4 +80,44 @@ export async function process_referral_purchase(purchase_uuid: string, referral_
     method: "POST",
     body: parameters
   })
+}
+
+export async function purchase_product(request: Request, response: Response, product_uri: string) {
+  const { ref } = request.query
+
+  const username = auth.get_username(request)
+  if (!username) return response.status(401).redirect("/login")
+  if (!product_uri) return response.status(400).redirect(request.url)
+
+  let query: QueryResult<any>
+
+  try {
+    query = await fetch_data.user("username", username, "uuid")
+    const user_uuid = query.rows[0].uuid
+
+    query = await fetch_data.product("uri", product_uri, "uuid, name")
+    if (query.rowCount === 0) {
+      response.status(400).redirect(request.url)
+    }
+    const product_uuid = query.rows[0].uuid
+    const product_name = query.rows[0].name
+
+    query = await pool.query(
+      "INSERT INTO purchases (user_uuid, product_uuid) \
+        VALUES ($1, $2) RETURNING uuid",
+      [user_uuid, product_uuid])
+    const purchase_uuid = query.rows[0].uuid
+
+    if (ref) {
+      await process_referral_purchase(purchase_uuid, ref as string)
+    }
+
+    response.cookie("alert_message", `Вы приобрели ${product_name}`)
+  }
+  catch (error) {
+    response.status(500).redirect(request.url)
+    throw error
+  }
+
+  response.status(200).redirect(request.url)
 }
