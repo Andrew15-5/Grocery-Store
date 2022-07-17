@@ -9,10 +9,13 @@ footer {
   color: tomato;
   text-align: center;
   background: #040404;
-  /* position:fixed; */
   bottom: 0px;
   height: 80px;
   width: 100%;
+}
+
+footer.home {
+  position: fixed;
 }
 
 header {
@@ -84,6 +87,7 @@ a {
   vertical-align: top;
   margin: 0 20px;
   position: relative;
+  user-select: none;
 }
 
 .nav_link:hover {
