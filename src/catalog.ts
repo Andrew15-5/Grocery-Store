@@ -4,6 +4,8 @@ import auth from "./utils/auth"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {
+    const theme = request.cookies.theme
+
     try {
       const query = await pool.query("SELECT * FROM products ORDER BY name;")
 
@@ -16,7 +18,8 @@ namespace catalog {
 
       response.status(200).render("catalog.hbs", {
         is_auth: auth.is_user_authenticated(request),
-        products: query.rows
+        products: query.rows,
+        theme: theme
       })
     }
     catch (error) {
