@@ -26,10 +26,10 @@ app.post("/catalog", catalog.post)
 app.get("/login", login.get)
 app.post("/login", login.post)
 
+app.get("/product/:product_uri", product.get)
+
 app.get("/registration", registration.get)
 app.post("/registration", registration.post)
-
-app.get("/product/:product_uri", product.get)
 
 app.get("/account", account.get)
 

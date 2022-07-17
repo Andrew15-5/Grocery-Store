@@ -2,25 +2,32 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Товар</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>{{product.name}}</title>
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
 </head>
 
 <body>
-    <main>
-        {{#each products}}
-        <h1>Продукт</h1>
-        <p class="data">Изображение</p>
-        <img style="height: 200px; width: 200px; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
-        </p>
-        <p class="data">Название</p>
-        {{this.name}}
-        <p class="data">Цена</p>
-        {{this.price}}
-        <p class="data">Описание</p>
-        {{this.description}}
-        {{/each}}
-    </main>
+  <nav>
+    <a href="/catalog">Каталог</a>
+    <a href="/account">Личный кабинет</a>
+    {{#if is_auth}}
+    <a id="log_out">Выйти из системы</a>
+    {{else}}
+    <a id="log_in" href="/login">Войти в систему</a>
+    {{/if}}
+  </nav>
+  <img style="height: 20%; width: 20%; object-fit: contain" src="{{product.image}}" alt="{{product.name}}" />
+  </p>
+  <label>Название</label> {{product.name}}
+  <br>
+  <br>
+  <label>Цена</label> {{product.price}}
+  <p>Описание:</p>
+  {{product.description}}
+  <script src="../js/utils.js"></script>
+  <script src="../js/log_out.js"></script>
 </body>
 
 </html>

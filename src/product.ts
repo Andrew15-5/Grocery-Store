@@ -1,24 +1,29 @@
-import { path, pool, Request, Response } from "./utils"
+import { Request, Response } from "./utils"
+import * as auth from "./utils/auth"
+import fetch_data from "./utils/fetch_data"
+
 namespace product {
-    export async function get(request: Request, response: Response) {
-        try {
-            const uri = request.params["product_uri"]
-            const query_response = await pool.query(
-                `SELECT * from products where uri = '${uri}';`)
-            for (let i = 0; i < query_response.rowCount; i++) {
-                const image_buffer = query_response.rows[i].image.toString("base64")
-                const image_src = `data:image/png;base64,${image_buffer}`
-                query_response.rows[i].image = image_src
-            }
-            response.status(200).render("product.hbs", {
-                products: query_response.rows
-            })
-        }
-        catch (error) {
-            console.log(error)
-            response.status(500).redirect("/catalog")
-        }
+  export async function get(request: Request, response: Response) {
+    try {
+      const { product_uri } = request.params
+      const query = await fetch_data.product("uri", product_uri, "*")
+
+      const product = query.rows[0]
+      const image_buffer: Buffer = product.image
+      const image_src =
+        "data:image/png;base64," + image_buffer.toString("base64")
+      product.image = image_src
+
+      response.status(200).render("product.hbs", {
+        is_auth: auth.is_user_authenticated(request),
+        product: product
+      })
     }
+    catch (error) {
+      response.status(500).redirect("/catalog")
+      throw error
+    }
+  }
 }
 
 export default product
