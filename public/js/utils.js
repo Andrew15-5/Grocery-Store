@@ -12,7 +12,7 @@ class utils {
     return cookies;
   }
   static remove_cookie(cookie) {
-    document.cookie = cookie + "=;max-age=0";
+    document.cookie = cookie + "=;max-age=0;path=/";
   }
   static init_theme_change() {
     let current_theme = localStorage.getItem("theme");
