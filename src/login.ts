@@ -2,7 +2,7 @@ import utils from "./utils"
 import { path, Request, Response } from "./utils"
 import auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
-import { check_password } from "./utils/hash"
+import hash from "./utils/hash"
 
 namespace login {
   export function get(request: Request, response: Response) {
@@ -29,10 +29,13 @@ namespace login {
     log_out_on_session_end = (log_out_on_session_end === "on")
 
     try {
-      const hash = await fetch_password(username)
-      if (hash === null) return response.status(400).redirect("/login")
+      const hashed_password = await fetch_password(username)
+      if (hashed_password === null) {
+        return response.status(400).redirect("/login")
+      }
 
-      const password_is_correct = await check_password(password, hash)
+      const password_is_correct =
+        await hash.check_password(password, hashed_password)
       if (!password_is_correct) return response.status(400).redirect("/login")
     }
     catch (error) {
