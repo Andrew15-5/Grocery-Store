@@ -5,24 +5,26 @@ import fetch_data from "./utils/fetch_data"
 namespace catalog {
   export async function get(request: Request, response: Response) {
     const { ref } = request.query
+    const suffix = (ref) ? "?ref=" + ref : ''
+    const redirect_url = "/catalog" + suffix
 
     try {
-      const query_response =
-        await pool.query("SELECT * FROM products ORDER BY name;")
-      for (let i = 0; i < query_response.rowCount; i++) {
-        const image_buffer = query_response.rows[i].image.toString("base64")
-        const image_src = `data:image/png;base64,${image_buffer}`
-        query_response.rows[i].image = image_src
+      const query = await pool.query("SELECT * FROM products ORDER BY name;")
+
+      for (let i = 0; i < query.rowCount; i++) {
+        const image_buffer: Buffer = query.rows[i].image
+        const image_src =
+          "data:image/png;base64," + image_buffer.toString("base64")
+        query.rows[i].image = image_src
       }
-      const is_auth = auth.is_user_authenticated(request)
+
       response.status(200).render("catalog.hbs", {
-        is_auth: is_auth,
-        products: query_response.rows
+        is_auth: auth.is_user_authenticated(request),
+        products: query.rows
       })
     }
     catch (error) {
-      const suffix = (ref) ? "?ref=" + ref : ''
-      response.status(500).redirect("/catalog" + suffix)
+      response.status(500).redirect(redirect_url)
       throw error
     }
   }
