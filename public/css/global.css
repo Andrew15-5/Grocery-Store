@@ -3,13 +3,13 @@ nav {
   justify-content: end;
 }
 
-nav > a {
+nav>a {
   color: white;
   text-decoration: none;
   user-select: none;
 }
 
-nav > a:hover {
+nav>a:hover {
   color: gray;
   cursor: pointer;
   user-select: none;

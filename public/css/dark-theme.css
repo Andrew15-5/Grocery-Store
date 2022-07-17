@@ -1,0 +1,118 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #040404;
+  height: 100%;
+}
+
+footer {
+  font-family: 'Raleway', sans-serif;
+  color: tomato;
+  text-align: center;
+  background: #040404;
+  /* position:fixed; */
+  bottom: 0px;
+  height: 80px;
+  width: 100%;
+}
+
+header {
+  font-family: 'Raleway', sans-serif;
+  color: tomato;
+  width: 90%;
+  padding: 30px 5%;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  right: 10px;
+  background: #040404;
+}
+
+.header_logo {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.header_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main:not(.sundress) {
+  box-sizing: border-box;
+  margin: 100px 0px;
+  padding: 1% 1%;
+  background: url("../images/tomato-dark.jpg") center repeat;
+  color: lightgray;
+  width: 100%;
+  height: 100vh;
+}
+
+.sundress {
+  background: darkslateblue;
+  box-sizing: border-box;
+  margin: 100px 0px;
+  padding: 1% 1%;
+  color: floralwhite;
+  width: 100%;
+  height: 100%;
+}
+
+button,
+input {
+  color: lightgray;
+  border-color: tomato;
+  background: #040404;
+  border-radius: 4px;
+}
+
+button {
+  color: tomato;
+  font-size: 20px;
+}
+
+a {
+  color: tomato;
+  text-decoration: none;
+}
+
+.nav_link {
+  color: tomato;
+  text-decoration: none;
+  transition: color 0.5 linear;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 20px;
+  position: relative;
+}
+
+.nav_link:hover {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.nav_link:after {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: lightgray;
+  position: absolute;
+  display: none
+}
+
+.nav_link:hover:after {
+  display: block;
+}
+
+.help {
+  color: rgba(128, 128, 128, 0.5);
+  font-size: 14px;
+  margin: 0;
+}
+
+.data {
+  border: 3px solid tomato;
+  padding: 5px;
+  border-radius: 4px;
+}
