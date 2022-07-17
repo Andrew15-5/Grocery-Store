@@ -5,10 +5,6 @@ import fetch_data from "./utils/fetch_data"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {
-    const { ref } = request.query
-    const suffix = (ref) ? "?ref=" + ref : ''
-    const redirect_url = "/catalog" + suffix
-
     try {
       const query = await pool.query("SELECT * FROM products ORDER BY name;")
 
@@ -25,7 +21,7 @@ namespace catalog {
       })
     }
     catch (error) {
-      response.status(500).redirect(redirect_url)
+      response.status(500).redirect(request.url)
       throw error
     }
   }
@@ -33,12 +29,10 @@ namespace catalog {
   export async function post(request: Request, response: Response) {
     const { product_uri } = request.body
     const { ref } = request.query
-    const suffix = (ref) ? "?ref=" + ref : ''
-    const redirect_url = "/catalog" + suffix
 
     const username = auth.get_username(request)
     if (!username) return response.status(401).redirect("/login")
-    if (!product_uri) return response.status(400).redirect(redirect_url)
+    if (!product_uri) return response.status(400).redirect(request.url)
 
     let query: QueryResult<any>
 
@@ -48,7 +42,7 @@ namespace catalog {
 
       query = await fetch_data.product("uri", product_uri, "uuid, name")
       if (query.rowCount === 0) {
-        response.status(400).redirect(redirect_url)
+        response.status(400).redirect(request.url)
       }
       const product_uuid = query.rows[0].uuid
       const product_name = query.rows[0].name
@@ -66,11 +60,11 @@ namespace catalog {
       response.cookie("alert_message", `Вы приобрели ${product_name}`)
     }
     catch (error) {
-      response.status(500).redirect(redirect_url)
+      response.status(500).redirect(request.url)
       throw error
     }
 
-    response.status(200).redirect(redirect_url)
+    response.status(200).redirect(request.url)
   }
 }
 
