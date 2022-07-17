@@ -1,6 +1,6 @@
 import utils from "./utils"
 import { pool, Request, Response } from "./utils"
-import * as auth from "./utils/auth"
+import auth from "./utils/auth"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {

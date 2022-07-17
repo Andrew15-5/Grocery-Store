@@ -1,5 +1,5 @@
 import { fetch, Request, Response } from "./utils"
-import * as auth from "./utils/auth"
+import auth from "./utils/auth"
 
 async function get_reward_balance_and_referral_id(username: string) {
   const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string

@@ -4,7 +4,7 @@ import fetch from "node-fetch"
 import path from "path"
 import { Pool, QueryResult } from "pg"
 
-import * as auth from "./utils/auth"
+import auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
 
 export { fetch, path, QueryResult, Request, Response }

@@ -1,6 +1,6 @@
 import utils from "./utils"
 import { path, Request, Response } from "./utils"
-import * as auth from "./utils/auth"
+import auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
 import { check_password } from "./utils/hash"
 

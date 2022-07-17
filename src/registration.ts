@@ -1,6 +1,6 @@
 import utils from "./utils"
 import { path, pool, Request, Response } from "./utils"
-import * as auth from "./utils/auth"
+import auth from "./utils/auth"
 import { generate_hash } from "./utils/hash"
 
 namespace registration {
