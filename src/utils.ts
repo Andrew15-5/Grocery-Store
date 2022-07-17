@@ -16,8 +16,13 @@ namespace utils {
     const env_vars: string[] = [
       "JWT_SECRET_KEY",
       "PEPPER",
-      "SERVER_PORT",
-      "REF_APP_SERVER_PORT"
+      "PGDATABASE",
+      "PGHOST",
+      "PGPASSWORD",
+      "PGPORT",
+      "PGUSER",
+      "REF_APP_SERVER_PORT",
+      "SERVER_PORT"
     ]
     let error_occured = false
     for (const env_var of env_vars) {
