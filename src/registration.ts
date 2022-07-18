@@ -9,7 +9,7 @@ namespace registration {
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.sendFile(path.resolve("./public/registration.html"))
+    response.render("registration.hbs")
   }
 
   export async function post(request: Request, response: Response) {

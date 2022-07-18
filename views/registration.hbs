@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>Регистрация</title>
+  <link rel="stylesheet" type="text/css" href="./css/global.css">
+  <link id="theme" rel="stylesheet" type="text/css" href="./css/dark-theme.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Raleway&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header_inner">
+      <div class="header_logo">Grocery Store</div>
+      <nav class="navigation">
+        <a class="nav_link" href="/">Сотрудничество</a>
+        <a class="nav_link" href="/catalog">Каталог</a>
+        <a id="change-theme" class="nav_link">Изменить тему</a>
+        <a class="nav_link" href="/account">Личный кабинет</a>
+        {{#if is_auth}}
+        <a id="log_out" class="nav_link">Выйти из системы</a>
+        {{else}}
+        <a id="log_in" class="nav_link" href="/login">Войти в систему</a>
+        {{/if}}
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Регистрация пользователя</h1>
+    <form method="post">
+      <label>Логин</label> <input type="text" placeholder="Введите логин" name="username" required autofocus autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
+      <br>
+      Для логина можно использовать только:
+      <ul>
+        <li>латинские буквы (a-z и A-Z)</li>
+        <li>цифры (0-9)</li>
+        <li>символы .-_</li>
+      </ul>
+      <br>
+      <label>Пароль</label> <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
+      <br>
+      <label>Повторите пароль</label> <input type="password" placeholder="Введите пароль" name="repeat_password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
+      <br>
+      Длина пароля от 10 до 1000 и включать в себя:
+      <ul>
+        <li>латинские буквы нижнего регистра (a-z)</li>
+        <li>латинские буквы верхнего регистра (A-Z)</li>
+        <li>цифры (0-9)</li>
+      </ul>
+      <br>
+      <input type="submit" value="Зарегистрироваться">
+    </form>
+    <br>
+    <a class="nav_link" href="/login">Войти в систему</a>
+  </main>
+
+  <footer>
+    <p> Компания: Rotten Tomatoes <br> Контактные данные: +7(995)305-78-05</p>
+  </footer>
+  <script src="./js/utils.js"></script>
+  <script src="./js/log_out.js"></script>
+  <script>utils.init_theme_change();</script>
+</body>
+</html>
