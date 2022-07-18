@@ -13,6 +13,21 @@ body {
   height: 100%;
 }
 
+body::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: tomato;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #040404;
+  border-radius: 6px;
+  border-left: 2px solid tomato;
+  border-right: 2px solid tomato;
+}
+
 ul {
   padding-inline-start: 40px;
 }

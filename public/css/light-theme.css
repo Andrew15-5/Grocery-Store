@@ -13,6 +13,21 @@ body {
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F1F1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #C1C1C1;
+  border-radius: 6px;
+  border-left: 2px solid #F1F1F1;
+  border-right: 2px solid #F1F1F1;
+}
+
 ul {
   padding-inline-start: 40px;
 }
