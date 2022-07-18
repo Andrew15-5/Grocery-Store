@@ -10,7 +10,7 @@ namespace login {
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.sendFile(path.resolve("./public/login.html"))
+    response.render("login.hbs")
   }
 
   export async function post(request: Request, response: Response) {
