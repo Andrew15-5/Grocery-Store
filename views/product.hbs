@@ -35,6 +35,9 @@
     <p>{{product.description}}</p>
     <form method="POST">
       <input type="submit" value="Купить">
+      {{#if is_auth}}
+      <input class="share" type="button" value="Поделиться" onclick="{{product.js_onclick_script}}">
+      {{/if}}
     </form>
   </main>
 

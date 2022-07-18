@@ -1,12 +1,18 @@
 import utils from "./utils"
 import { pool, Request, Response } from "./utils"
 import auth from "./utils/auth"
+import fetch_data from "./utils/fetch_data"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {
     const theme = request.cookies.theme
+    const host = request.get("host")
 
     try {
+      const username = auth.get_username(request)
+      let referral_id
+      if (username) ({ referral_id } = await fetch_data.referral_id(username))
+
       const query = await pool.query("SELECT * FROM products ORDER BY name;")
 
       for (let i = 0; i < query.rowCount; i++) {
@@ -14,6 +20,12 @@ namespace catalog {
         const image_src =
           "data:image/png;base64," + image_buffer.toString("base64")
         query.rows[i].image = image_src
+        if (username) {
+          const referral_url =
+            `${host}/product/${query.rows[i].uri}?ref=${referral_id}`
+          query.rows[i].js_onclick_script =
+            `navigator.clipboard.writeText("${referral_url}");`
+        }
       }
 
       response.status(200).render("catalog.hbs", {
