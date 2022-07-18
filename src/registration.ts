@@ -1,5 +1,5 @@
 import utils from "./utils"
-import { path, pool, Request, Response } from "./utils"
+import { pool, Request, Response } from "./utils"
 import auth from "./utils/auth"
 import hash from "./utils/hash"
 
@@ -9,7 +9,7 @@ namespace registration {
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.sendFile(path.resolve("./public/registration.html"))
+    response.render("registration.hbs")
   }
 
   export async function post(request: Request, response: Response) {

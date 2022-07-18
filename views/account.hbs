@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
   <title>Личный кабинет</title>
-  <link rel="stylesheet" type="text/css" href="./css/global.css">
+  <link id="theme" rel="stylesheet" type="text/css" href="./css/{{theme}}-theme.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Raleway&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <nav>
-    <a href="/catalog">Каталог</a>
-    <a id="log_out">Выйти из системы</a>
-  </nav>
-  <h1>Личный кабинет</h1>
-  <label>Логин</label> {{username}}
-  <br>
-  <label>Бонусный баланс</label> {{reward_balance}}
-  <br>
-  <label>Реферальная ссылка</label>
-  {{#if referral_id}}
-  {{referral_url}} <input type="button" value="Скопировать ссылку" onclick="{{js_onclick_script}}">
-  {{else}}
-  -
-  {{/if}}
+  <header>
+    <div class="header_inner">
+      <div class="header_logo">Grocery Store</div>
+      <nav class="navigation">
+        <a class="nav_link" href="/">Сотрудничество</a>
+        <a class="nav_link" href="/catalog">Каталог</a>
+        <a id="change-theme" class="nav_link">Изменить тему</a>
+        <a class="nav_link" href="/account">Личный кабинет</a>
+        <a id="log_out" class="nav_link">Выйти</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Личный кабинет</h1>
+    <p>Логин</p>
+    {{username}}
+    <p>Бонусный счет</p>
+    {{reward_balance}}
+    <p>Персональная реферальная ссылка</p>
+    {{#if referral_id}}
+    {{referral_url}} <input type="button" value="Скопировать ссылку" onclick="{{js_onclick_script}}">
+    {{else}}
+    -
+    {{/if}}
+  </main>
+
+  <footer>
+      <p> Компания: Rotten Tomatoes <br> Контактные данные: +7(995)305-78-05</p>
+  </footer>
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
-  {{#if error_message}}
-  <script>alert("{{error_message}}")</script>
-  {{/if}}
+  <script>utils.init_theme_change();</script>
 </body>
-
 </html>

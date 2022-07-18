@@ -1,5 +1,5 @@
 import utils from "./utils"
-import { path, Request, Response } from "./utils"
+import { Request, Response } from "./utils"
 import auth from "./utils/auth"
 import fetch_data from "./utils/fetch_data"
 import hash from "./utils/hash"
@@ -10,7 +10,7 @@ namespace login {
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.sendFile(path.resolve("./public/login.html"))
+    response.render("login.hbs")
   }
 
   export async function post(request: Request, response: Response) {

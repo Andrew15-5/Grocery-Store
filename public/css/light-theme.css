@@ -1,7 +1,40 @@
+:root {
+  --header-height: 80px;
+  --footer-height: 80px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F1F1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #C1C1C1;
+  border-radius: 6px;
+  border-left: 2px solid #F1F1F1;
+  border-right: 2px solid #F1F1F1;
+}
+
+ul {
+  padding-inline-start: 40px;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
   background: antiquewhite;
-  height: 100%;
 }
 
 footer {
@@ -10,20 +43,22 @@ footer {
   text-align: center;
   background: antiquewhite;
   bottom: 0px;
-  height: 80px;
+  height: var(--footer-height);
   width: 100%;
 }
 
-footer.home {
-  position: fixed;
+footer>p {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 header {
   font-family: 'Raleway', sans-serif;
   color: darkgoldenrod;
   width: 90%;
-  padding: 30px 5%;
-  position: fixed;
+  height: var(--header-height);
+  padding: 0 5%;
   top: 0;
   left: 0px;
   right: 10px;
@@ -39,26 +74,38 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  top: 50%;
+  transform: translateY(60%);
+}
+
+main {
+  min-height: calc(100% - var(--header-height) - var(--footer-height));
 }
 
 main:not(.sundress) {
   box-sizing: border-box;
-  margin: 100px 0px;
   padding: 1% 1%;
   background: url("../images/tomato-light.png") center repeat;
   color: darkolivegreen;
   width: 100%;
-  height: 100vh;
+}
+
+main>h1,
+main>p {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 }
 
 .sundress {
   background: floralwhite;
   box-sizing: border-box;
-  margin: 100px 0px;
   padding: 1% 1%;
   color: darkolivegreen;
   width: 100%;
-  height: 100%;
+}
+
+img.people {
+  max-width: 47%;
 }
 
 button,
@@ -67,6 +114,7 @@ input {
   border-color: darkolivegreen;
   background: antiquewhite;
   border-radius: 4px;
+  padding: 3px;
 }
 
 button {
@@ -112,7 +160,6 @@ a {
 .help {
   color: rgba(100, 100, 100, 0.5);
   font-size: 14px;
-  margin: 0;
 }
 
 .data {

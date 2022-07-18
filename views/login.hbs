@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
-  <title>Каталог</title>
-  <link rel="stylesheet" type="text/css" href="./css/catalog.css">
-  <link id="theme" rel="stylesheet" type="text/css" href="./css/{{theme}}-theme.css">
+  <title>Вход</title>
+  <link id="theme" rel="stylesheet" type="text/css" href="./css/dark-theme.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Raleway&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
     <div class="header_inner">
@@ -27,20 +27,20 @@
   </header>
 
   <main>
-    <h1>Каталог товаров</h1>
-    <div class="container">
-      {{#each products}}
-      <a class="item" href="/product/{{this.uri}}">
-        <img style="width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
-        <div>{{this.name}}</div>
-        <div>{{this.price}} ₽</div>
-        <form method="POST">
-          <input type="hidden" name="product_uri" value="{{this.uri}}">
-          <input type="submit" value="Купить">
-        </form>
-      </a>
-      {{/each}}
-    </div>
+    <h1>Вход в личный кабинет</h1>
+    <form method="post">
+      <label>Логин</label> <input type="text" placeholder="Введите логин" name="username" required autofocus autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
+      <br>
+      <label>Пароль</label> <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
+      <br>
+      <div title="Выйти из системы при закрытии браузера (то есть всех его вкладок и окон)">
+        <input type="checkbox" name="log_out_on_session_end" autocomplete="off"><label>Чужой комьютер 🛈</label>
+      </div>
+      <br>
+      <input type="submit" value="Войти">
+    </form>
+    <br>
+    <a class="nav_link" href="/registration">Зарегистрироваться</a>
   </main>
 
   <footer>
@@ -48,7 +48,6 @@
   </footer>
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
-  <script src="./js/show_purchase_message.js"></script>
   <script>utils.init_theme_change();</script>
 </body>
 </html>

@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
   <title>{{product.name}}</title>
-  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link id="theme" rel="stylesheet" type="text/css" href="../css/{{theme}}-theme.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Raleway&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <nav>
-    <a href="/catalog">Каталог</a>
-    <a href="/account">Личный кабинет</a>
-    {{#if is_auth}}
-    <a id="log_out">Выйти из системы</a>
-    {{else}}
-    <a id="log_in" href="/login">Войти в систему</a>
-    {{/if}}
-  </nav>
-  <img style="height: 20%; width: 20%; object-fit: contain" src="{{product.image}}" alt="{{product.name}}" />
-  </p>
-  <label>Название</label> {{product.name}}
-  <br>
-  <br>
-  <label>Цена</label> {{product.price}}
-  <p>Описание:</p>
-  {{product.description}}
-  <form method="POST">
-    <input type="submit" value="Купить">
-  </form>
+  <header>
+    <div class="header_inner">
+      <div class="header_logo">Grocery Store</div>
+      <nav class="navigation">
+        <a class="nav_link" href="/">Сотрудничество</a>
+        <a class="nav_link" href="/catalog">Каталог</a>
+        <a id="change-theme" class="nav_link">Изменить тему</a>
+        <a class="nav_link" href="/account">Личный кабинет</a>
+        {{#if is_auth}}
+        <a id="log_out" class="nav_link">Выйти из системы</a>
+        {{else}}
+        <a id="log_in" class="nav_link" href="/login">Войти в систему</a>
+        {{/if}}
+      </nav>
+    </div>
+  </header>
 
+  <main>
+    <img style="height: 20%; width: 20%; object-fit: contain" src="{{product.image}}" alt="{{product.name}}" />
+    </p>
+    <label>Название</label> {{product.name}}
+    <br>
+    <label>Цена</label> {{product.price}}
+    <p>Описание:</p>
+    <p>{{product.description}}</p>
+    <form method="POST">
+      <input type="submit" value="Купить">
+    </form>
+  </main>
+
+  <footer>
+    <p> Компания: Rotten Tomatoes <br> Контактные данные: +7(995)305-78-05</p>
+  </footer>
   <script src="../js/utils.js"></script>
   <script src="../js/log_out.js"></script>
   <script src="../js/show_purchase_message.js"></script>
+  <script>utils.init_theme_change();</script>
 </body>
-
 </html>

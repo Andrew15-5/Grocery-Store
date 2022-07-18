@@ -20,6 +20,8 @@ async function get_reward_balance_and_referral_id(username: string) {
 
 namespace account {
   export async function get(request: Request, response: Response) {
+    const theme = request.cookies.theme
+
     try {
       const username = auth.get_username(request)
       if (!username) return response.status(401).redirect("/login")
@@ -38,7 +40,8 @@ namespace account {
         referral_id: referral_id,
         referral_url: referral_url,
         reward_balance: reward_balance,
-        username: username
+        username: username,
+        theme: theme
       })
     }
     catch (error) {

@@ -5,6 +5,8 @@ import fetch_data from "./utils/fetch_data"
 
 namespace product {
   export async function get(request: Request, response: Response) {
+    const theme = request.cookies.theme
+
     try {
       const { product_uri } = request.params
       const query = await fetch_data.product("uri", product_uri, "*")
@@ -17,7 +19,8 @@ namespace product {
 
       response.status(200).render("product.hbs", {
         is_auth: auth.is_user_authenticated(request),
-        product: product
+        product: product,
+        theme: theme
       })
     }
     catch (error) {
