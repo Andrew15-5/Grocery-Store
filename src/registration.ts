@@ -1,5 +1,5 @@
 import utils from "./utils"
-import { path, pool, Request, Response } from "./utils"
+import { pool, Request, Response } from "./utils"
 import auth from "./utils/auth"
 import hash from "./utils/hash"
 
