@@ -25,7 +25,12 @@ class utils {
     document.getElementById("change-theme").onclick = () => {
       current_theme = (current_theme === "dark") ? "light" : "dark";
       this.update_cookie("theme", current_theme, new Date("9999"))
-      theme_element.setAttribute("href", `./css/${current_theme}-theme.css`);
+      let prefix = ''
+      if (/^\/product\/[a-zA-Z0-9]+/.test(window.location.pathname)) {
+        prefix = '.'
+      }
+      theme_element.setAttribute(
+        "href", `${prefix}./css/${current_theme}-theme.css`);
     }
   }
 }
