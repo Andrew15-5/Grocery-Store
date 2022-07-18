@@ -28,14 +28,17 @@
 
   <main>
     <h1>Каталог товаров</h1>
-    <div class="container">
-      {{#each products}}
-      <a class="item" href="/product/{{this.uri}}">
-        <img style="width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
-        <div>{{this.name}}</div>
-        <div>{{this.price}} ₽</div>
+    <div id="container">
+      {{#each products as |product|}}
+      <a class="item" href="/product/{{product.uri}}">
+        <img style="width: 100%; object-fit: contain" src="{{product.image}}" alt="{{product.name}}" />
+        <div>{{product.name}}</div>
+        <div>{{product.price}} ₽</div>
         <form method="POST">
-          <input type="hidden" name="product_uri" value="{{this.uri}}">
+        {{#if ../is_auth}}
+        <input class="share" type="button" value="Поделиться" onclick="{{product.js_onclick_script}}">
+        {{/if}}
+          <input type="hidden" name="product_uri" value="{{product.uri}}">
           <input type="submit" value="Купить">
         </form>
       </a>
@@ -48,6 +51,7 @@
   </footer>
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
+  <script src="./js/share_referral_link.js"></script>
   <script src="./js/show_purchase_message.js"></script>
   <script>utils.init_theme_change();</script>
 </body>
