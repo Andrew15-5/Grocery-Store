@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
   <title>Каталог</title>
   <link rel="stylesheet" type="text/css" href="./css/global.css">
+  <link id="theme" rel="stylesheet" type="text/css" href="./css/{{theme}}-theme.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Raleway&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <nav>
-    <a href="/account">Личный кабинет</a>
-    {{#if is_auth}}
-    <a id="log_out">Выйти из системы</a>
-    {{else}}
-    <a id="log_in" href="/login">Войти в систему</a>
-    {{/if}}
-  </nav>
-  <div class="container">
-    {{#each products}}
-    <a class="item" href="/product/{{this.uri}}">
-      <img style="height: 100%; width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
-      <div>{{this.name}}</div>
-      <div>{{this.price}} ₽</div>
-      <form method="POST">
-        <input type="hidden" name="product_uri" value="{{this.uri}}">
-        <input type="submit" value="Купить">
-      </form>
-    </a>
-    {{/each}}
-  </div>
+  <header>
+    <div class="header_inner">
+      <div class="header_logo">Grocery Store</div>
+      <nav class="navigation">
+        <a class="nav_link" href="/">Сотрудничество</a>
+        <a class="nav_link" href="/catalog">Каталог</a>
+        <a id="change-theme" class="nav_link">Изменить тему</a>
+        <a class="nav_link" href="/account">Личный кабинет</a>
+        {{#if is_auth}}
+        <a id="log_out" class="nav_link">Выйти из системы</a>
+        {{else}}
+        <a id="log_in" class="nav_link" href="/login">Войти в систему</a>
+        {{/if}}
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Каталог товаров</h1>
+    <div class="container">
+      {{#each products}}
+      <a class="item" href="/product/{{this.uri}}">
+        <img style="width: 100%; object-fit: contain" src="{{this.image}}" alt="{{this.name}}" />
+        <div>{{this.name}}</div>
+        <div>{{this.price}} ₽</div>
+        <form method="POST">
+          <input type="hidden" name="product_uri" value="{{this.uri}}">
+          <input type="submit" value="Купить">
+        </form>
+      </a>
+      {{/each}}
+    </div>
+  </main>
+
+  <footer>
+    <p> Компания: Rotten Tomatoes <br> Контактные данные: +7(995)305-78-05</p>
+  </footer>
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
   <script src="./js/show_purchase_message.js"></script>
+  <script>utils.init_theme_change();</script>
 </body>
-
 </html>
