@@ -5,11 +5,12 @@ import hash from "./utils/hash"
 
 namespace registration {
   export function get(request: Request, response: Response) {
+    const theme = utils.get_current_theme(request)
     response.status(200)
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.render("registration.hbs")
+    response.render("registration.hbs", { theme })
   }
 
   export async function post(request: Request, response: Response) {

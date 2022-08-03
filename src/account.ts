@@ -1,3 +1,4 @@
+import utils from "./utils"
 import { fetch, Request, Response } from "./utils"
 import auth from "./utils/auth"
 
@@ -20,7 +21,7 @@ async function get_reward_balance_and_referral_id(username: string) {
 
 namespace account {
   export async function get(request: Request, response: Response) {
-    const theme = request.cookies.theme
+    const theme = utils.get_current_theme(request)
 
     try {
       const username = auth.get_username(request)
@@ -41,7 +42,7 @@ namespace account {
         referral_url: referral_url,
         reward_balance: reward_balance,
         username: username,
-        theme: theme
+        theme
       })
     }
     catch (error) {

@@ -128,6 +128,10 @@ namespace utils {
     response.status(200).redirect(request.url)
   }
 
+  export function get_current_theme(request: Request) {
+    return request.cookies.theme || "light"
+  }
+
   export function update_theme_cookie(request: Request, response: Response, next: NextFunction) {
     const theme = request.cookies.theme || "light"
     response.cookie("theme", theme, { expires: new Date("9999") })
