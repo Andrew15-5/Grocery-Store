@@ -127,6 +127,11 @@ a {
   text-decoration: none;
 }
 
+.error {
+  color: tomato;
+  margin-bottom: 5px;
+}
+
 .nav_link {
   color: tomato;
   text-decoration: none;

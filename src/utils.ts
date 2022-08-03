@@ -55,23 +55,69 @@ namespace utils {
     return new_referral_id
   }
 
-  export function is_username_valid(password: string) {
-    const allowed_charset_and_length_restriction = /^[a-zA-Z0-9._-]{1,20}$/
-    if (allowed_charset_and_length_restriction.test(password)) return true
-    return false
+  export namespace username {
+    const max_length = 20
+    const allowed_length_restriction = new RegExp(`^.{1,${max_length}}$`, 's')
+    const allowed_charset_and_length_restriction =
+      new RegExp(`^[a-zA-Z0-9._-]{1,${max_length}}$`)
+
+    export function is_valid(username: string) {
+      return allowed_charset_and_length_restriction.test(username)
+    }
+
+    export function validation_error(username: string) {
+      if (!allowed_length_restriction.test(username)) {
+        return `Длина должна быть в диапазоне [1;${max_length}]`
+      }
+      if (!allowed_charset_and_length_restriction.test(username)) {
+        return "Использовать можно только разрешённые символы"
+      }
+      return null
+    }
   }
 
-  export function is_password_valid(password: string) {
-    // Allow any visible ASCII character; length must be in [10;1000]
-    const allowed_charset_and_length_restriction = /^[ -~]{10,1000}$/
+  export namespace password {
+    const min_length = 10
+    const max_length = 1000
+    const allowed_length_restriction =
+      new RegExp(`^.{${min_length},${max_length}}$`, 's')
+    // Allow any visible ASCII character
+    const allowed_charset_and_length_restriction =
+      new RegExp(`^[ -~]{${min_length},${max_length}}$`)
     const includes_letters = /[a-z]+/
     const includes_LETTERS = /[A-Z]+/
     const includes_digits = /[0-9]+/
-    if (allowed_charset_and_length_restriction.test(password) &&
-      includes_letters.test(password) &&
-      includes_LETTERS.test(password) &&
-      includes_digits.test(password)) return true
-    return false
+
+    export function is_valid(password: string) {
+      return (allowed_charset_and_length_restriction.test(password) &&
+        includes_letters.test(password) &&
+        includes_LETTERS.test(password) &&
+        includes_digits.test(password))
+    }
+
+    export function validation_error(password: string) {
+      if (!allowed_length_restriction.test(password)) {
+        console.log(password, password.length)
+        return `Длина должна быть в диапазоне [${min_length};${max_length}]`
+      }
+      if (!allowed_charset_and_length_restriction.test(password)) {
+        return "<a>Использовать можно только символы ASCII с №32 ( ) по №126 (~)"
+      }
+      let not_included = []
+      if (!includes_letters.test(password)) {
+        not_included.push("латинские буквы нижнего регистра (a-z)")
+      }
+      if (!includes_LETTERS.test(password)) {
+        not_included.push("латинские буквы верхнего регистра (A-Z)")
+      }
+      if (!includes_digits.test(password)) {
+        not_included.push("цифры (0-9)")
+      }
+      if (not_included.length) {
+        return "Отсутствуют следующие символы: " + not_included.join(', ')
+      }
+      return null
+    }
   }
 
   export async function process_referral_purchase(purchase_uuid: string, referral_id: string) {
