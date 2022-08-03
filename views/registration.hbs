@@ -29,6 +29,9 @@
   <main>
     <h1>Регистрация пользователя</h1>
     <form method="post">
+      {{#if username_error}}
+      <p class="error">{{username_error}}</p>
+      {{/if}}
       <label>Логин</label> <input type="text" placeholder="Введите логин" name="username" required autofocus autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
       <br>
       Для логина можно использовать только:
@@ -38,6 +41,15 @@
         <li>символы .-_</li>
       </ul>
       <br>
+      {{#if password_error}}
+      <div class="error">
+        {{#if link_wrapper}}
+          <a class="nav_link" href="https://www.ascii-code.com">{{password_error}}</a>
+        {{else}}
+          {{password_error}}
+        {{/if}}
+      </div>
+      {{/if}}
       <label>Пароль</label> <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
       <br>
       <label>Повторите пароль</label> <input type="password" placeholder="Введите пароль" name="repeat_password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>

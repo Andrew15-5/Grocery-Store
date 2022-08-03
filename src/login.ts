@@ -21,23 +21,25 @@ namespace login {
     if (typeof username !== "string" ||
       typeof password !== "string" ||
       (typeof log_out_on_session_end !== "string" &&
-        typeof log_out_on_session_end !== "undefined") ||
-      !utils.is_username_valid(username) ||
-      !utils.is_password_valid(password)) {
+        typeof log_out_on_session_end !== "undefined")) {
       return response.status(400).redirect("/login")
     }
+
+    if (!validate_username_and_password(username, password, response)) return
 
     log_out_on_session_end = (log_out_on_session_end === "on")
 
     try {
       const hashed_password = await fetch_password(username)
       if (hashed_password === null) {
-        return response.status(400).redirect("/login")
+        return incorrect_username_or_password(request, response)
       }
 
       const password_is_correct =
         await hash.check_password(password, hashed_password)
-      if (!password_is_correct) return response.status(400).redirect("/login")
+      if (!password_is_correct) {
+        return incorrect_username_or_password(request, response)
+      }
     }
     catch (error) {
       response.status(500).redirect("/login")
@@ -52,6 +54,45 @@ namespace login {
     const response = await fetch_data.user("username", username, "password")
     if (response.rowCount === 0) return null
     return response.rows[0].password
+  }
+
+  function validate_username_and_password(username: string, password: string, response: Response) {
+    let username_error = null
+    let password_error = null
+    let error_occured = false
+
+    if (!utils.username.is_valid(username)) {
+      error_occured = true
+      username_error = utils.username.validation_error(username)
+    }
+
+    if (!utils.password.is_valid(password)) {
+      error_occured = true
+      password_error = utils.password.validation_error(password)
+    }
+
+    if (error_occured) {
+      let link_wrapper = false
+      if (password_error && /^<a>/.test(password_error)) {
+        password_error = password_error.slice(3)
+        link_wrapper = true
+      }
+      response.status(400).render("login.hbs", {
+        username_error,
+        password_error,
+        link_wrapper
+      })
+      return false
+    }
+    return true
+  }
+
+  function incorrect_username_or_password(request: Request, response: Response) {
+    const theme = utils.get_current_theme(request)
+    return response.status(400).render("login.hbs", {
+      username_error: "Неверный логин или пароль",
+      theme
+    })
   }
 }
 
