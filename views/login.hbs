@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width" />
   <title>Вход</title>
-  <link id="theme" rel="stylesheet" type="text/css" href="./css/dark-theme.css">
+  <link id="theme" rel="stylesheet" type="text/css" href="./css/{{theme}}-theme.css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Raleway&display=swap" rel="stylesheet">
 </head>
 
@@ -29,8 +29,20 @@
   <main>
     <h1>Вход в личный кабинет</h1>
     <form method="post">
+      {{#if username_error}}
+      <p class="error">{{username_error}}</p>
+      {{/if}}
       <label>Логин</label> <input type="text" placeholder="Введите логин" name="username" required autofocus autocomplete="off" pattern="[a-zA-Z0-9._-]+" maxlength="20"><br>
       <br>
+      {{#if password_error}}
+      <div class="error">
+        {{#if link_wrapper}}
+          <a class="nav_link" href="https://www.ascii-code.com">{{password_error}}</a>
+        {{else}}
+          {{password_error}}
+        {{/if}}
+      </div>
+      {{/if}}
       <label>Пароль</label> <input type="password" placeholder="Введите пароль" name="password" required autocomplete="off" pattern="[ -~]+" minlength="10" maxlength="1000"><br>
       <br>
       <div title="Выйти из системы при закрытии браузера (то есть всех его вкладок и окон)">

@@ -5,11 +5,12 @@ import hash from "./utils/hash"
 
 namespace registration {
   export function get(request: Request, response: Response) {
+    const theme = utils.get_current_theme(request)
     response.status(200)
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.render("registration.hbs")
+    response.render("registration.hbs", { theme })
   }
 
   export async function post(request: Request, response: Response) {
@@ -17,12 +18,12 @@ namespace registration {
 
     if (typeof username !== "string" ||
       typeof password !== "string" ||
-      typeof repeat_password !== "string" ||
-      password !== repeat_password ||
-      !utils.is_username_valid(username) ||
-      !utils.is_password_valid(password)) {
+      typeof repeat_password !== "string") {
       return response.status(400).redirect("/registration")
     }
+
+    if (!validate_username_and_password(
+      username, password, repeat_password, request, response)) return
 
     try {
       const query_response = await pool.query("SELECT username FROM users;")
@@ -44,6 +45,44 @@ namespace registration {
     }
 
     auth.authenticate_user(username, response).status(200).redirect("/catalog")
+  }
+
+  function validate_username_and_password(username: string, password: string, repeat_password: string, request: Request, response: Response) {
+    const theme = utils.get_current_theme(request)
+    let username_error = null
+    let password_error = null
+    let error_occured = false
+
+    if (!utils.username.is_valid(username)) {
+      error_occured = true
+      username_error = utils.username.validation_error(username)
+    }
+
+    if (!utils.password.is_valid(password)) {
+      error_occured = true
+      password_error = utils.password.validation_error(password)
+    }
+
+    if (password !== repeat_password) {
+      error_occured = true
+      password_error = "Пароли не совпадают"
+    }
+
+    if (error_occured) {
+      let link_wrapper = false
+      if (password_error && /^<a>/.test(password_error)) {
+        password_error = password_error.slice(3)
+        link_wrapper = true
+      }
+      response.status(400).render("registration.hbs", {
+        username_error,
+        password_error,
+        link_wrapper,
+        theme
+      })
+      return false
+    }
+    return true
   }
 }
 

@@ -5,7 +5,7 @@ import fetch_data from "./utils/fetch_data"
 
 namespace catalog {
   export async function get(request: Request, response: Response) {
-    const theme = request.cookies.theme
+    const theme = utils.get_current_theme(request)
     const host = request.get("host")
 
     try {
