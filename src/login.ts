@@ -6,11 +6,12 @@ import hash from "./utils/hash"
 
 namespace login {
   export function get(request: Request, response: Response) {
+    const theme = utils.get_current_theme(request)
     response.status(200)
     if (auth.is_user_authenticated(request)) {
       return response.redirect("/catalog")
     }
-    response.render("login.hbs")
+    response.render("login.hbs", { theme })
   }
 
   export async function post(request: Request, response: Response) {
