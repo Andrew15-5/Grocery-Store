@@ -19,18 +19,28 @@ class utils {
     if (date) cookie += ";expires=" + date.toUTCString()
     document.cookie = cookie + ";path=/";
   }
+
+  static apply_theme(theme, theme_element) {
+    let prefix = '';
+    if (/^\/product\/[a-zA-Z0-9]+/.test(window.location.pathname)) {
+      prefix = '.';
+    }
+    if (theme_element) theme_element.setAttribute(
+      "href", `${prefix}./css/${theme}-theme.css`);
+  }
+
   static init_theme_change() {
     const theme_element = document.getElementById("theme");
-    let current_theme = this.parse_cookies()["theme"]
-    document.getElementById("change-theme").onclick = () => {
-      current_theme = (current_theme === "dark") ? "light" : "dark";
-      this.update_cookie("theme", current_theme, new Date("9999"))
-      let prefix = ''
-      if (/^\/product\/[a-zA-Z0-9]+/.test(window.location.pathname)) {
-        prefix = '.'
+    const change_theme_element = document.getElementById("change-theme");
+    let current_theme = this.parse_cookies()["theme"];
+    if (change_theme_element) {
+      change_theme_element.onclick = () => {
+        current_theme = (current_theme === "dark") ? "light" : "dark";
+        this.update_cookie("theme", current_theme, new Date("9999"))
+        this.apply_theme(current_theme, theme_element)
       }
-      theme_element.setAttribute(
-        "href", `${prefix}./css/${current_theme}-theme.css`);
+    } else {
+      console.log('Невозможно использовать кнопку "Изменить тему"');
     }
   }
 }
