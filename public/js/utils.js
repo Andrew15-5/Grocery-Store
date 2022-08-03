@@ -11,12 +11,14 @@ class utils {
     }
     return cookies;
   }
+
   static remove_cookie(cookie) {
     document.cookie = cookie + "=;max-age=0;path=/";
   }
+
   static update_cookie(name, value, date) {
-    let cookie = `${name}=${value}`
-    if (date) cookie += ";expires=" + date.toUTCString()
+    let cookie = `${name}=${value}`;
+    if (date) cookie += ";expires=" + date.toUTCString();
     document.cookie = cookie + ";path=/";
   }
 
@@ -36,8 +38,8 @@ class utils {
     if (change_theme_element) {
       change_theme_element.onclick = () => {
         current_theme = (current_theme === "dark") ? "light" : "dark";
-        this.update_cookie("theme", current_theme, new Date("9999"))
-        this.apply_theme(current_theme, theme_element)
+        this.update_cookie("theme", current_theme, new Date("9999"));
+        this.apply_theme(current_theme, theme_element);
       }
     } else {
       console.log('Невозможно использовать кнопку "Изменить тему"');
