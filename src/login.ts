@@ -9,7 +9,7 @@ namespace login {
     const theme = utils.get_current_theme(request)
     response.status(200)
     if (auth.is_user_authenticated(request)) {
-      return response.redirect("/catalog")
+      return response.redirect(utils.get_redirect_url(request))
     }
     response.render("login.hbs", { theme })
   }
@@ -46,8 +46,10 @@ namespace login {
       throw error
     }
 
-    auth.authenticate_user(username, response, log_out_on_session_end)
-      .status(200).redirect("/catalog")
+    auth
+      .authenticate_user(username, response, log_out_on_session_end)
+      .status(200)
+      .redirect(utils.get_redirect_url(request))
   }
 
   async function fetch_password(username: string) {
