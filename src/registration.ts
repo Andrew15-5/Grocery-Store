@@ -8,7 +8,7 @@ namespace registration {
     const theme = utils.get_current_theme(request)
     response.status(200)
     if (auth.is_user_authenticated(request)) {
-      return response.redirect("/catalog")
+      return response.redirect(utils.get_redirect_url(request))
     }
     response.render("registration.hbs", { theme })
   }
@@ -44,7 +44,10 @@ namespace registration {
       throw error
     }
 
-    auth.authenticate_user(username, response).status(200).redirect("/catalog")
+    auth
+      .authenticate_user(username, response)
+      .status(200)
+      .redirect(utils.get_redirect_url(request))
   }
 
   function validate_username_and_password(username: string, password: string, repeat_password: string, request: Request, response: Response) {

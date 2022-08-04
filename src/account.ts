@@ -25,7 +25,10 @@ namespace account {
 
     try {
       const username = auth.get_username(request)
-      if (!username) return response.status(401).redirect("/login")
+      if (!username) {
+        return response.status(401).redirect(
+          `/login?referrer=${encodeURIComponent(request.originalUrl)}`)
+      }
 
       const { referral_id, reward_balance, error_message } =
         await get_reward_balance_and_referral_id(username)
