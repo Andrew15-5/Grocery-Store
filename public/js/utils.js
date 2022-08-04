@@ -12,6 +12,23 @@ class utils {
     return cookies;
   }
 
+  static parse_search(search) {
+    let temp_params = search.slice(1)
+    let params = []
+    if (temp_params.indexOf('&') > -1) {
+      temp_params = temp_params.split('&')
+      for (const i in temp_params) {
+        if (temp_params[i].indexOf('=') > -1) {
+          params.push(temp_params[i].split('='))
+        }
+      }
+    } else {
+      params.push(temp_params.split('='))
+    }
+    params = Object.fromEntries(params)
+    return params
+  }
+
   static remove_cookie(cookie) {
     document.cookie = cookie + "=;max-age=0;path=/";
   }
