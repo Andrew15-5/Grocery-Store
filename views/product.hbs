@@ -34,10 +34,10 @@
     <p>Описание:</p>
     <p>{{product.description}}</p>
     <form method="POST">
-      <input type="submit" value="Купить">
       {{#if is_auth}}
-      <input class="share" type="button" value="Поделиться" onclick="{{product.js_onclick_script}}">
+      <input class="share" type="button" value="Поделиться" onclick="{{product.js_clipboard_script}}">
       {{/if}}
+      <input type="submit" value="Купить" onclick="{{product.js_cursor_wait_script}}">
     </form>
   </main>
 
