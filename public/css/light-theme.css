@@ -165,16 +165,19 @@ a {
 }
 
 .nav-link::after {
-  display: none;
+  display: block;
   content: "";
-  width: 100%;
+  width: 0%;
+  left: 50%;
   height: 3px;
   background-color: darkgoldenrod;
   position: absolute;
+  transition: left 0.2s linear, width 0.2s linear;
 }
 
 .nav-link:hover::after {
-  display: block;
+  width: 100%;
+  left: 0%;
 }
 
 .help {
