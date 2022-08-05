@@ -139,7 +139,7 @@ a {
 .nav_link {
   color: tomato;
   text-decoration: none;
-  transition: color 0.5 linear;
+  transition: color 0.2s linear;
   display: inline-block;
   vertical-align: top;
   margin: 0 20px;
@@ -152,17 +152,16 @@ a {
   cursor: pointer;
 }
 
-.nav_link:after {
-  display: block;
+.nav_link::after {
+  display: none;
   content: "";
   width: 100%;
   height: 3px;
   background-color: lightgray;
   position: absolute;
-  display: none
 }
 
-.nav_link:hover:after {
+.nav_link:hover::after {
   display: block;
 }
 
