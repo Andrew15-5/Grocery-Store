@@ -136,7 +136,7 @@ a {
   margin-bottom: 5px;
 }
 
-.nav_link {
+.nav-link {
   color: darkgoldenrod;
   text-decoration: none;
   transition: color 0.2s linear;
@@ -147,12 +147,12 @@ a {
   user-select: none;
 }
 
-.nav_link:hover {
+.nav-link:hover {
   color: black;
   cursor: pointer;
 }
 
-.nav_link::after {
+.nav-link::after {
   display: none;
   content: "";
   width: 100%;
@@ -161,7 +161,7 @@ a {
   position: absolute;
 }
 
-.nav_link:hover::after {
+.nav-link:hover::after {
   display: block;
 }
 
