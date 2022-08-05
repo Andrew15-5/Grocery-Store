@@ -109,7 +109,8 @@ img.people {
 }
 
 button,
-input {
+input[type=button],
+input[type=submit] {
   color: darkolivegreen;
   border-color: darkolivegreen;
   background: antiquewhite;
