@@ -21,10 +21,14 @@ namespace product {
       const image_src =
         "data:image/png;base64," + image_buffer.toString("base64")
       product.image = image_src
+      product.js_cursor_wait_script =
+        "for (const tag of ['input', 'a', 'body'])" +
+        "for (const e of document.getElementsByTagName(tag))" +
+        "e.setAttribute('style', 'cursor: wait');"
       if (username) {
         const referral_url =
           `${host}/product/${product.uri}?ref=${referral_id}`
-        product.js_onclick_script =
+        product.js_clipboard_script =
           `navigator.clipboard.writeText("${referral_url}");`
       }
 

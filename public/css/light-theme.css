@@ -109,17 +109,33 @@ img.people {
 }
 
 button,
-input {
+input[type=button],
+input[type=submit] {
   color: darkolivegreen;
-  border-color: darkolivegreen;
+  border: 2px darkolivegreen solid;
   background: antiquewhite;
   border-radius: 4px;
   padding: 3px;
+  font-size: 17px;
 }
 
-button {
-  color: darkolivegreen;
-  font-size: 20px;
+button:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  color: #342;
+  border-color: #342;
+}
+
+button:active,
+input[type=button]:active,
+input[type=submit]:active {
+  color: black;
+  border-color: black;
+  border-width: 1px;
+}
+
+.wait {
+  cursor: wait !important;
 }
 
 a {
@@ -132,10 +148,10 @@ a {
   margin-bottom: 5px;
 }
 
-.nav_link {
+.nav-link {
   color: darkgoldenrod;
   text-decoration: none;
-  transition: color 0.5 linear;
+  transition: color 0.2s linear;
   display: inline-block;
   vertical-align: top;
   margin: 0 20px;
@@ -143,23 +159,25 @@ a {
   user-select: none;
 }
 
-.nav_link:hover {
-  color: darkgoldenrod;
+.nav-link:hover {
+  color: black;
   cursor: pointer;
 }
 
-.nav_link:after {
+.nav-link::after {
   display: block;
   content: "";
-  width: 100%;
+  width: 0%;
+  left: 50%;
   height: 3px;
   background-color: darkgoldenrod;
   position: absolute;
-  display: none
+  transition: left 0.2s linear, width 0.2s linear;
 }
 
-.nav_link:hover:after {
-  display: block;
+.nav-link:hover::after {
+  width: 100%;
+  left: 0%;
 }
 
 .help {
