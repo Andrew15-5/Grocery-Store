@@ -20,10 +20,14 @@ namespace catalog {
         const image_src =
           "data:image/png;base64," + image_buffer.toString("base64")
         query.rows[i].image = image_src
+        query.rows[i].js_cursor_wait_script =
+          "for (const tag of ['input', 'a', 'body'])" +
+          "for (const e of document.getElementsByTagName(tag))" +
+          "{e.setAttribute('class', e.getAttribute('class') + ' wait');}"
         if (username) {
           const referral_url =
             `${host}/product/${query.rows[i].uri}?ref=${referral_id}`
-          query.rows[i].js_onclick_script =
+          query.rows[i].js_clipboard_script =
             `navigator.clipboard.writeText("${referral_url}");`
         }
       }

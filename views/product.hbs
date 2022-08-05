@@ -12,14 +12,14 @@
     <div class="header_inner">
       <div class="header_logo">Grocery Store</div>
       <nav class="navigation">
-        <a class="nav_link" href="/">Сотрудничество</a>
-        <a class="nav_link" href="/catalog">Каталог</a>
-        <a id="change-theme" class="nav_link">Изменить тему</a>
-        <a class="nav_link" href="/account">Личный кабинет</a>
+        <a class="nav-link" href="/">Сотрудничество</a>
+        <a class="nav-link" href="/catalog">Каталог</a>
+        <a id="change-theme" class="nav-link">Изменить тему</a>
+        <a class="nav-link" href="/account">Личный кабинет</a>
         {{#if is_auth}}
-        <a id="log_out" class="nav_link">Выйти из системы</a>
+        <a id="log_out" class="nav-link">Выйти из системы</a>
         {{else}}
-        <a id="log_in" class="nav_link" href="/login">Войти в систему</a>
+        <a id="log_in" class="nav-link" href="/login">Войти в систему</a>
         {{/if}}
       </nav>
     </div>
@@ -34,10 +34,10 @@
     <p>Описание:</p>
     <p>{{product.description}}</p>
     <form method="POST">
-      <input type="submit" value="Купить">
       {{#if is_auth}}
-      <input class="share" type="button" value="Поделиться" onclick="{{product.js_onclick_script}}">
+      <input class="share" type="button" value="Поделиться" onclick="{{product.js_clipboard_script}}">
       {{/if}}
+      <input type="submit" value="Купить" onclick="{{product.js_cursor_wait_script}}">
     </form>
   </main>
 
