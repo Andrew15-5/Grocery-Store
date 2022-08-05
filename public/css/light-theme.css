@@ -112,15 +112,26 @@ button,
 input[type=button],
 input[type=submit] {
   color: darkolivegreen;
-  border-color: darkolivegreen;
+  border: 2px darkolivegreen solid;
   background: antiquewhite;
   border-radius: 4px;
   padding: 3px;
+  font-size: 20px;
 }
 
-button {
-  color: darkolivegreen;
-  font-size: 20px;
+button:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  color: #342;
+  border-color: #342;
+}
+
+button:active,
+input[type=button]:active,
+input[type=submit]:active {
+  color: black;
+  border-color: black;
+  border-width: 1px;
 }
 
 .wait {

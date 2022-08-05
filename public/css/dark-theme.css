@@ -112,15 +112,26 @@ button,
 input[type=button],
 input[type=submit] {
   color: lightgray;
-  border-color: tomato;
+  border: 2px tomato solid;
   background: #040404;
   border-radius: 4px;
   padding: 3px;
+  font-size: 20px;
 }
 
-button {
-  color: tomato;
-  font-size: 20px;
+button:hover,
+input[type=button]:hover,
+input[type=submit]:hover {
+  color: darkgray;
+  border-color: #b42;
+}
+
+button:active,
+input[type=button]:active,
+input[type=submit]:active {
+  color: gray;
+  border-color: #a31;
+  border-width: 1px;
 }
 
 .wait {
