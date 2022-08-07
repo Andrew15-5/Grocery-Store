@@ -25,14 +25,18 @@
     <h1>Личный кабинет</h1>
     <p>Логин</p>
     {{username}}
-    <p>Бонусный счет</p>
+    <p>Бонусный счёт</p>
+    {{#unless error_message}}
     {{reward_balance}}
+    {{else}}
+    -
+    {{/unless}}
     <p>Персональная реферальная ссылка</p>
-    {{#if referral_id}}
+    {{#unless error_message}}
     {{referral_url}} <input type="button" value="Скопировать ссылку" onclick="{{js_onclick_script}}">
     {{else}}
     -
-    {{/if}}
+    {{/unless}}
   </main>
 
   <footer>
@@ -40,6 +44,7 @@
   </footer>
   <script src="./js/utils.js"></script>
   <script src="./js/log_out.js"></script>
+  <script src="./js/show_error_message.js"></script>
   <script>utils.init_theme_change();</script>
 </body>
 </html>

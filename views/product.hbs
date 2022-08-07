@@ -34,9 +34,9 @@
     <p>Описание:</p>
     <p>{{product.description}}</p>
     <form method="POST">
-      {{#if is_auth}}
+      {{#unless error_message}}
       <input class="share" type="button" value="Поделиться" onclick="{{product.js_clipboard_script}}">
-      {{/if}}
+      {{/unless}}
       <input type="submit" value="Купить" onclick="{{product.js_cursor_wait_script}}">
     </form>
   </main>
@@ -47,6 +47,7 @@
   <script src="../js/utils.js"></script>
   <script src="../js/log_out.js"></script>
   <script src="../js/show_purchase_message.js"></script>
+  <script src="../js/show_error_message.js"></script>
   <script>utils.init_theme_change();</script>
 </body>
 </html>
