@@ -20,16 +20,12 @@ namespace fetch_data {
     const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
     const get_referral_id_url =
       `http://localhost:${REF_APP_SERVER_PORT}/user-referral-id/${username}`
-    const data = await fetch(get_referral_id_url)
-
-    if (data.status === 200) {
-      return await data.json()
+    try {
+      const data = await fetch(get_referral_id_url)
+      if (data.status === 200) return await data.json()
     }
-    return {
-      error_message:
-        "Ошибка работы сервиса реферальных ссылок. " +
-        `Не удалось получить Бонусный баланс.`
-    }
+    catch (e) { }
+    return { error_message: "Ошибка работы сервиса реферальных ссылок. " }
   }
 }
 
