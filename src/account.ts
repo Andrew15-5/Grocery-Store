@@ -1,18 +1,7 @@
 import utils from "./utils"
-import { fetch, Request, Response } from "./utils"
+import { Request, Response } from "./utils"
 import auth from "./utils/auth"
-
-async function get_reward_balance_and_referral_id(username: string) {
-  const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
-  const get_referral_info_url =
-    `http://localhost:${REF_APP_SERVER_PORT}/user-referral-info/${username}`
-  try {
-    const data = await fetch(get_referral_info_url)
-    if (data.status === 200) return await data.json()
-  }
-  catch (e) { }
-  return { error_message: "Ошибка работы сервиса реферальных ссылок." }
-}
+import fetch_data from "./utils/fetch_data"
 
 namespace account {
   export async function get(request: Request, response: Response) {
@@ -26,7 +15,7 @@ namespace account {
       }
 
       const { referral_id, reward_balance, error_message } =
-        await get_reward_balance_and_referral_id(username)
+        await fetch_data.reward_balance_and_referral_id(username)
 
       let js_onclick_script
       let referral_url

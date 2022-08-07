@@ -10,6 +10,9 @@ import fetch_data from "./utils/fetch_data"
 export { fetch, path, QueryResult, Request, Response }
 
 export const pool = new Pool()
+export const referral_error = {
+  error_message: "Ошибка работы сервиса реферальных ссылок."
+}
 
 namespace utils {
   export function make_sure_all_env_vars_are_set() {
@@ -140,7 +143,7 @@ namespace utils {
       if (response.status === 200) return {}
     }
     catch (e) { }
-    return { error_message: "Ошибка работы сервиса реферальных ссылок." }
+    return referral_error
   }
 
   export async function purchase_product(request: Request, response: Response, product_uri: string) {
