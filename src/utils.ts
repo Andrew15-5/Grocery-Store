@@ -100,7 +100,6 @@ namespace utils {
 
     export function validation_error(password: string) {
       if (!allowed_length_restriction.test(password)) {
-        console.log(password, password.length)
         return `Длина должна быть в диапазоне [${min_length};${max_length}]`
       }
       if (!allowed_charset_and_length_restriction.test(password)) {
