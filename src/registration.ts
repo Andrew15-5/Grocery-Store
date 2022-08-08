@@ -4,13 +4,14 @@ import auth from "./utils/auth"
 import hash from "./utils/hash"
 
 namespace registration {
-  export function get(request: Request, response: Response) {
+  export async function get(request: Request, response: Response) {
     const theme = utils.get_current_theme(request)
     response.status(200)
-    if (auth.is_user_authenticated(request)) {
+    if (auth.is_user_authenticated(request) &&
+      await auth.is_user_exist(request)) {
       return response.redirect(utils.get_redirect_url(request))
     }
-    response.render("registration.hbs", { theme })
+    auth.deauthenticate_user(response).render("registration.hbs", { theme })
   }
 
   export async function post(request: Request, response: Response) {
