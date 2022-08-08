@@ -26,13 +26,16 @@ namespace product {
         "for (const tag of ['input', 'a', 'body'])" +
         "for (const e of document.getElementsByTagName(tag))" +
         "e.setAttribute('style', 'cursor: wait');"
-      if (!error_message) {
+      if (username && !error_message) {
         const referral_url =
           `${host}/product/${product.uri}?ref=${referral_id}`
         product.js_clipboard_script =
           `navigator.clipboard.writeText("${referral_url}");`
       }
-      else response.cookie("error_message", error_message)
+
+      if (username && error_message) {
+        response.cookie("error_message", error_message)
+      }
 
       response.status(200).render("product.hbs", {
         error_message: error_message,

@@ -25,7 +25,7 @@ namespace catalog {
           "for (const tag of ['input', 'a', 'body'])" +
           "for (const e of document.getElementsByTagName(tag))" +
           "{e.setAttribute('class', e.getAttribute('class') + ' wait');}"
-        if (!error_message) {
+        if (username && !error_message) {
           const referral_url =
             `${host}/product/${query.rows[i].uri}?ref=${referral_id}`
           query.rows[i].js_clipboard_script =
@@ -33,7 +33,9 @@ namespace catalog {
         }
       }
 
-      if (error_message) response.cookie("error_message", error_message)
+      if (username && error_message) {
+        response.cookie("error_message", error_message)
+      }
 
       response.status(200).render("catalog.hbs", {
         error_message: error_message,

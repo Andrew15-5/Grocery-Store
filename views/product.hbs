@@ -34,9 +34,11 @@
     <p>Описание:</p>
     <p>{{product.description}}</p>
     <form method="POST">
+      {{#if is_auth}}
       {{#unless error_message}}
       <input class="share" type="button" value="Поделиться" onclick="{{product.js_clipboard_script}}">
       {{/unless}}
+      {{/if}}
       <input type="submit" value="Купить" onclick="{{product.js_cursor_wait_script}}">
     </form>
   </main>
