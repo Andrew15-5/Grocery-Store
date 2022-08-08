@@ -1,10 +1,10 @@
 "use strict";
-let params = {};
+var params = {};
 if (document.location.search) {
   params = utils.parse_search(document.location.search)
 }
 
-const array = ["/login", "/registration"]
+var array = ["/login", "/registration"]
 if (array.indexOf(window.location.pathname) > -1 &&
   document.referrer &&
   !params["referrer"]) {

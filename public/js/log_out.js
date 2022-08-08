@@ -1,5 +1,5 @@
 "use strict";
-const log_out_element = document.getElementById("log_out")
+var log_out_element = document.getElementById("log_out")
 if (log_out_element) {
   log_out_element.onclick = () => {
     utils.remove_cookie("access_token");
