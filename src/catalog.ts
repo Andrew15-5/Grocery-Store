@@ -9,10 +9,16 @@ namespace catalog {
     const host = request.get("host")
 
     try {
-      const username = auth.get_username(request)
+      let username = auth.get_username(request)
       let referral_id, error_message
-      if (username) ({ referral_id, error_message } =
-        await fetch_data.referral_id(username))
+      if (username && !await auth.is_user_exist(request)) {
+        auth.deauthenticate_user(response)
+        username = undefined
+      }
+      if (username) {
+        ({ referral_id, error_message } =
+          await fetch_data.referral_id(username))
+      }
 
       const query = await pool.query("SELECT * FROM products ORDER BY name;")
 
@@ -39,7 +45,7 @@ namespace catalog {
 
       response.status(200).render("catalog.hbs", {
         error_message: error_message,
-        is_auth: auth.is_user_authenticated(request),
+        is_auth: username,
         products: query.rows,
         theme: theme
       })

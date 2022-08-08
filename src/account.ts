@@ -9,8 +9,8 @@ namespace account {
 
     try {
       const username = auth.get_username(request)
-      if (!username) {
-        return response.status(401).redirect(
+      if (!username || !await auth.is_user_exist(request)) {
+        return auth.deauthenticate_user(response).status(401).redirect(
           `/login?referrer=${encodeURIComponent(request.originalUrl)}`)
       }
 

@@ -39,7 +39,7 @@ namespace product {
 
       response.status(200).render("product.hbs", {
         error_message: error_message,
-        is_auth: auth.is_user_authenticated(request),
+        is_auth: username,
         product: product,
         theme: theme
       })
