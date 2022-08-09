@@ -1,4 +1,4 @@
-import { fetch, pool } from "../utils"
+import { fetch, pool, referral_error } from "../utils"
 
 namespace fetch_data {
   async function fetch_data(table: string, search_key: string, search_value: string, return_key: string) {
@@ -16,20 +16,33 @@ namespace fetch_data {
     return fetch_data("products", search_key, search_value, return_key)
   }
 
-  export async function referral_id(username: string) {
+  async function referral_stuff(username: string, api: string) {
     const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
-    const get_referral_id_url =
-      `http://localhost:${REF_APP_SERVER_PORT}/user-referral-id/${username}`
-    const data = await fetch(get_referral_id_url)
+    const get_referral_stuff_url =
+      `http://localhost:${REF_APP_SERVER_PORT}/${api}/${username}`
+    try {
+      const data = await fetch(get_referral_stuff_url)
+      if (data.status === 200) return await data.json()
+    }
+    catch (e) { }
+    return referral_error
+  }
 
-    if (data.status === 200) {
-      return await data.json()
-    }
-    return {
-      error_message:
-        "Ошибка работы сервиса реферальных ссылок. " +
-        `Не удалось получить Бонусный баланс.`
-    }
+  export async function reward_balance_and_referral_id(username: string):
+    Promise<{
+      error_message?: string
+      referral_id: string
+      reward_balance: number
+    }> {
+    return referral_stuff(username, "user-referral-info")
+  }
+
+  export async function referral_id(username: string):
+    Promise<{
+      error_message?: string
+      referral_id: string
+    }> {
+    return referral_stuff(username, "user-referral-id")
   }
 }
 

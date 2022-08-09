@@ -36,7 +36,9 @@
         <div>{{product.price}} ₽</div>
         <form method="POST">
           {{#if ../is_auth}}
+          {{#unless ../error_message}}
           <input class="share" type="button" value="Поделиться" onclick="{{product.js_clipboard_script}}">
+          {{/unless}}
           {{/if}}
           <input type="hidden" name="product_uri" value="{{product.uri}}">
           <input type="submit" value="Купить" onclick="{{product.js_cursor_wait_script}}">
@@ -53,6 +55,7 @@
   <script src="./js/log_out.js"></script>
   <script src="./js/share_referral_link.js"></script>
   <script src="./js/show_purchase_message.js"></script>
+  <script src="./js/show_error_message.js"></script>
   <script>utils.init_theme_change();</script>
 </body>
 </html>

@@ -9,9 +9,16 @@ namespace catalog {
     const host = request.get("host")
 
     try {
-      const username = auth.get_username(request)
-      let referral_id
-      if (username) ({ referral_id } = await fetch_data.referral_id(username))
+      let username = auth.get_username(request)
+      let referral_id, error_message
+      if (username && !await auth.is_user_exist(request)) {
+        auth.deauthenticate_user(response)
+        username = undefined
+      }
+      if (username) {
+        ({ referral_id, error_message } =
+          await fetch_data.referral_id(username))
+      }
 
       const query = await pool.query("SELECT * FROM products ORDER BY name;")
 
@@ -24,7 +31,7 @@ namespace catalog {
           "for (const tag of ['input', 'a', 'body'])" +
           "for (const e of document.getElementsByTagName(tag))" +
           "{e.setAttribute('class', e.getAttribute('class') + ' wait');}"
-        if (username) {
+        if (username && !error_message) {
           const referral_url =
             `${host}/product/${query.rows[i].uri}?ref=${referral_id}`
           query.rows[i].js_clipboard_script =
@@ -32,8 +39,13 @@ namespace catalog {
         }
       }
 
+      if (username && error_message) {
+        response.cookie("error_message", error_message)
+      }
+
       response.status(200).render("catalog.hbs", {
-        is_auth: auth.is_user_authenticated(request),
+        error_message: error_message,
+        is_auth: username,
         products: query.rows,
         theme: theme
       })

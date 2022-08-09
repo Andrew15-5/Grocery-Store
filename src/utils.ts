@@ -10,6 +10,9 @@ import fetch_data from "./utils/fetch_data"
 export { fetch, path, QueryResult, Request, Response }
 
 export const pool = new Pool()
+export const referral_error = {
+  error_message: "Ошибка работы сервиса реферальных ссылок."
+}
 
 namespace utils {
   export function make_sure_all_env_vars_are_set() {
@@ -97,7 +100,6 @@ namespace utils {
 
     export function validation_error(password: string) {
       if (!allowed_length_restriction.test(password)) {
-        console.log(password, password.length)
         return `Длина должна быть в диапазоне [${min_length};${max_length}]`
       }
       if (!allowed_charset_and_length_restriction.test(password)) {
@@ -120,7 +122,10 @@ namespace utils {
     }
   }
 
-  export async function process_referral_purchase(purchase_uuid: string, referral_id: string) {
+  export async function process_referral_purchase(purchase_uuid: string, referral_id: string):
+    Promise<{
+      error_message?: string
+    }> {
     const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
     const get_referral_id_url =
       `http://localhost:${REF_APP_SERVER_PORT}/process-purchase`
@@ -128,10 +133,16 @@ namespace utils {
     const parameters = new URLSearchParams()
     parameters.append("purchase_uuid", purchase_uuid)
     parameters.append("referral_id", referral_id)
-    await fetch(get_referral_id_url, {
-      method: "POST",
-      body: parameters
-    })
+
+    try {
+      const response = await fetch(get_referral_id_url, {
+        method: "POST",
+        body: parameters
+      })
+      if (response.status === 200) return {}
+    }
+    catch (e) { }
+    return referral_error
   }
 
   export async function purchase_product(request: Request, response: Response, product_uri: string) {
@@ -161,7 +172,9 @@ namespace utils {
       const purchase_uuid = query.rows[0].uuid
 
       if (ref) {
-        await process_referral_purchase(purchase_uuid, ref as string)
+        const { error_message } =
+          await process_referral_purchase(purchase_uuid, ref as string)
+        if (error_message) response.cookie("error_message", error_message)
       }
 
       response.cookie("alert_message", `Вы приобрели ${product_name}`)

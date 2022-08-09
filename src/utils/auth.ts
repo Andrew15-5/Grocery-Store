@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 
+import fetch_data from "./fetch_data"
 import { Request, Response } from "../utils"
 
 namespace auth {
@@ -38,6 +39,16 @@ namespace auth {
       return false
     }
     return true
+  }
+
+  export async function is_user_exist(request: Request) {
+    if (!is_user_authenticated(request)) {
+      throw Error("User is not authenticated")
+    }
+    const username = get_username(request) as string
+    const result = await fetch_data.user("username", username, "username")
+      .catch(error => { throw error })
+    return (result.rowCount === 1)
   }
 }
 
