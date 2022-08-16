@@ -3,6 +3,9 @@ version: "2.2"
 services:
   PostgreSQL_for_Grocery_Store:
     image: ${IMAGE_HOST}postgressql_for_grocery_store
+    build:
+      context: ./db/
+      dockerfile: Dockerfile
     ports:
       - ${PGPORT}:5432
     environment:
