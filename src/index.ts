@@ -11,6 +11,9 @@ import utils from "./utils"
 import { path } from "./utils"
 import product from "./product"
 
+process.on("SIGINT", utils.SIG_handler)
+process.on("SIGTERM", utils.SIG_handler)
+
 utils.make_sure_all_env_vars_are_set()
 
 const app = express()

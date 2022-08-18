@@ -37,6 +37,14 @@ namespace utils {
     if (error_occured) process.exit(1)
   }
 
+  export async function SIG_handler(signal: string) {
+    console.log("Got", signal, "signal")
+    console.log("Disconnecting from database")
+    await pool.end()
+    console.log("Exiting")
+    process.exit()
+  }
+
   const string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
   function generate_random_string(length: number, charset: string) {
