@@ -5,13 +5,22 @@ services:
     image: ${IMAGE_HOST}postgressql_for_grocery_store
     build:
       context: ./db/
-      dockerfile: Dockerfile
-    ports:
-      - ${PGPORT}:5432
     environment:
       POSTGRES_PASSWORD:
     volumes:
       - postgresql_for_grocery_store_data:/var/lib/postgresql/data
+  Grocery_Store:
+    image: ${IMAGE_HOST}grocery_store
+    depends_on:
+      - PostgreSQL_for_Grocery_Store
+    build:
+      context: .
+      args:
+        SERVER_PORT:
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    links:
+      - PostgreSQL_for_Grocery_Store:${PGHOST}
 
 volumes:
   postgresql_for_grocery_store_data:

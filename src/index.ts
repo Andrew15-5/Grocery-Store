@@ -1,4 +1,5 @@
 import cookie_parser from "cookie-parser"
+import "dotenv/config"
 import express from "express"
 
 import account from "./account"
@@ -9,6 +10,9 @@ import registration from "./registration"
 import utils from "./utils"
 import { path } from "./utils"
 import product from "./product"
+
+process.on("SIGINT", utils.SIG_handler)
+process.on("SIGTERM", utils.SIG_handler)
 
 utils.make_sure_all_env_vars_are_set()
 
