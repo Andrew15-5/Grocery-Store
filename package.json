@@ -4,9 +4,9 @@
   "description": "Repository was created as a part of university practise and as an example of a \"store\" that can integrate the ref-app (https://github.com/Andrew15-5/ref-app).",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "export $(cat .env) && npx tsnd --respawn src/index.ts",
+    "dev": "npx tsnd --respawn src/index.ts",
     "build": "npx tsc",
-    "start": "export $(cat .env) && node .",
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -38,6 +38,7 @@
   "dependencies": {
     "argon2": "^0.28.7",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",

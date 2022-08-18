@@ -1,4 +1,5 @@
 import cookie_parser from "cookie-parser"
+import "dotenv/config"
 import express from "express"
 
 import account from "./account"
