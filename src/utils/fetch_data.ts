@@ -18,8 +18,9 @@ namespace fetch_data {
 
   async function referral_stuff(username: string, api: string) {
     const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
+    const REF_APP_SERVER_HOST = process.env.REF_APP_SERVER_HOST as string
     const get_referral_stuff_url =
-      `http://localhost:${REF_APP_SERVER_PORT}/${api}/${username}`
+      `http://${REF_APP_SERVER_HOST}:${REF_APP_SERVER_PORT}/${api}/${username}`
     try {
       const data = await fetch(get_referral_stuff_url)
       if (data.status === 200) return await data.json()
