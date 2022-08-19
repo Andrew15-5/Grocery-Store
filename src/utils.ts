@@ -25,6 +25,7 @@ namespace utils {
       "PGPORT",
       "PGUSER",
       "REF_APP_SERVER_PORT",
+      "REF_APP_SERVER_HOST",
       "SERVER_PORT"
     ]
     let error_occured = false
@@ -35,6 +36,14 @@ namespace utils {
       }
     }
     if (error_occured) process.exit(1)
+  }
+
+  export async function SIG_handler(signal: string) {
+    console.log("Got", signal, "signal")
+    console.log("Disconnecting from database")
+    await pool.end()
+    console.log("Exiting")
+    process.exit()
   }
 
   const string = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -127,8 +136,9 @@ namespace utils {
       error_message?: string
     }> {
     const REF_APP_SERVER_PORT = process.env.REF_APP_SERVER_PORT as string
+    const REF_APP_SERVER_HOST = process.env.REF_APP_SERVER_HOST as string
     const get_referral_id_url =
-      `http://localhost:${REF_APP_SERVER_PORT}/process-purchase`
+      `http://${REF_APP_SERVER_HOST}:${REF_APP_SERVER_PORT}/process-purchase`
 
     const parameters = new URLSearchParams()
     parameters.append("purchase_uuid", purchase_uuid)
