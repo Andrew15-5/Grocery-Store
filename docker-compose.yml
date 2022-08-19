@@ -13,12 +13,24 @@ services:
     image: ${IMAGE_HOST}grocery_store
     depends_on:
       - PostgreSQL_for_Grocery_Store
+      - Ref-App
     build:
       context: .
       args:
         SERVER_PORT:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
+    links:
+      - PostgreSQL_for_Grocery_Store:${PGHOST}
+      - Ref-App:ref-app
+  Ref-App:
+    image: ${IMAGE_HOST}ref-app
+    depends_on:
+      - PostgreSQL_for_Grocery_Store
+    build:
+      context: ./ref-app/
+      args:
+        SERVER_PORT: ${REF_APP_SERVER_PORT}
     links:
       - PostgreSQL_for_Grocery_Store:${PGHOST}
 
