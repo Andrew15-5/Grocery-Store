@@ -2,8 +2,19 @@
 
 ## About
 
-Repository was created as a part of university practise and as an example of a
-"store" that can integrate the [ref-app](<https://github.com/Andrew15-5/ref-app>).
+Referral link system + Internet shop. When a user is buying products through a
+referral link the referral link owner will get a percent of the total price
+paid.
+
+Repository was created as a part of university practicum and as an example of a
+"shop" that can integrate the [ref-app](<https://github.com/Andrew15-5/ref-app>).
+
+## Showcase
+
+```sh
+git clone https://github.com/Andrew15-5/Grocery-Store.git -b dev
+just
+```
 
 ## Contributors
 
